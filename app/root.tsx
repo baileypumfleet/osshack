@@ -1,5 +1,6 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import stylesheet from "~/tailwind.css";
+import { rootAuthLoader } from "@clerk/remix/ssr.server";
+import type { LinksFunction, MetaFunction, LoaderFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -8,12 +9,23 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { ClerkApp, ClerkErrorBoundary } from "@clerk/remix";
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  { rel: "stylesheet", href: stylesheet },
 ];
 
-export default function App() {
+export const meta: MetaFunction = () => ([
+  { charset: "utf-8" },
+  { name: "viewport", content: "width=device-width,initial-scale=1" },
+  { property: "og:title", content: "OSShack" },
+]);
+ 
+export const loader: LoaderFunction = (args) => rootAuthLoader(args);
+
+export const ErrorBoundary = ClerkErrorBoundary();
+
+function App() {
   return (
     <html lang="en">
       <head>
@@ -31,3 +43,5 @@ export default function App() {
     </html>
   );
 }
+
+export default ClerkApp(App);

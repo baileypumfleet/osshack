@@ -1,41 +1,31 @@
 import type { MetaFunction } from "@remix-run/node";
+import Hero from "./components/Hero";
+import Sponsors from "./components/Sponsors";
+import WhyJoin from "./components/WhyJoin";
+import Date from "./components/Date";
+import Schedule from "./components/Schedule";
+import SignupCTA from "./components/SignupCTA";
+import Team from "./components/Team";
+import Footer from "./components/Footer";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "OSShack" },
+    { name: "description", content: "Win $100k in prizes and contribute to open-source. Hosted in New York and remotely." },
   ];
 };
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
+    <main>
+      <Hero />
+      <Sponsors />
+      <WhyJoin />
+      <Date />
+      <Schedule />
+      <SignupCTA />
+      <Team />
+      <Footer />
+    </main>
   );
 }
