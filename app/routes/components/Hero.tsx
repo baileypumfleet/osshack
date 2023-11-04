@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import GradientHero from "./GradientHero";
 
 const navigation = [
   { name: "Sponsors", href: "#sponsors" },
@@ -13,7 +14,7 @@ export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div style={{backgroundImage: "url(\"background.jpg\")", backgroundSize: "4350px", backgroundPositionY: "-300px"}}>
+    <div>
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
@@ -106,6 +107,8 @@ export default function Hero() {
         </Dialog>
       </header>
       <main>
+        <GradientHero />
+
         <div className="relative isolate">
           <div
             className="absolute left-1/2 right-0 top-0 -z-10 -ml-24 transform-gpu overflow-hidden blur-3xl lg:ml-24 xl:ml-48"
