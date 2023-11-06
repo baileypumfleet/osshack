@@ -4,11 +4,13 @@ import { json } from "@remix-run/node";
 import Shell from "~/components/Shell";
 import prisma from "~/lib/prisma";
 import { useLoaderData } from "@remix-run/react";
-import { ClockIcon } from "@heroicons/react/24/solid";
+import { ClockIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import Sponsors from "../components/Sponsors";
 import Footer from "../components/Footer";
+import { getAuth } from "@clerk/remix/ssr.server";
+import { createClerkClient } from "@clerk/remix/api.server";
 dayjs.extend(relativeTime);
 
 export const meta: MetaFunction = () => {
@@ -47,13 +49,19 @@ export default function Index() {
                 </div>
                 <div className="border border-dashed border-orange-900 rounded px-4 py-2 text-orange-900">
                   Share this on{" "}
-                  <a href="https://twitter.com/intent/tweet?text=I'm%20participating%20in%20OSShack%2C%20where%20you%20can%20earn%20prizes%20with%20bounties%20and%20challenges%20in%20open%20source%20projects.%20Join%20us%20on%20December%201-3%20remotely%20or%20in%20NYC!&url=https%3A%2F%2Fosshack.com" className="font-semibold underline">
+                  <a
+                    href="https://twitter.com/intent/tweet?text=I'm%20participating%20in%20OSShack%2C%20where%20you%20can%20earn%20prizes%20with%20bounties%20and%20challenges%20in%20open%20source%20projects.%20Join%20us%20on%20December%201-3%20remotely%20or%20in%20NYC!&url=https%3A%2F%2Fosshack.com"
+                    className="font-semibold underline"
+                  >
                     Twitter
                   </a>
                 </div>
                 <div className="border border-dashed border-orange-900 rounded px-4 py-2 text-orange-900">
                   Need help?{" "}
-                  <a href="mailto:bailey@pumfleet.co.uk" className="font-semibold underline">
+                  <a
+                    href="mailto:bailey@pumfleet.co.uk"
+                    className="font-semibold underline"
+                  >
                     Get in touch
                   </a>
                 </div>
@@ -72,25 +80,40 @@ export default function Index() {
   return (
     <div>
       <SignedIn>
-        <Shell>
-          {data.map((project) => (
+        <Shell title="Dashboard">
+          {data.projects.map((project) => (
             <div key={project.id} className="mb-16">
               <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-4">
                 {project.name}
               </h2>
-              <div className="grid grid-cols-3 gap-4">
+              {data.user.projectId === project.id && (
+                <a
+                  href="/dashboard/new"
+                  className="text-orange-500 hover:text-orange-700 text-xl font-cal"
+                >
+                  <PencilSquareIcon className="w-4 h-4 mb-0.5 inline-block" />{" "}
+                  Create a new bounty
+                </a>
+              )}
+              <div className="grid grid-cols-3 gap-4 mt-4">
                 {project.bounties.map((bounty) => (
-                  <div
+                  <a
+                    href={`/bounty/${bounty.id}`}
                     key={bounty.id}
-                    className="border border-dashed border-orange-900 rounded p-4"
+                    className="border border-dashed border-orange-900 hover:border-orange-500 group rounded p-4 relative"
                   >
-                    <h3 className="text-2xl font-cal text-orange-900">
+                    <h3 className="text-2xl font-cal text-orange-900 group-hover:text-orange-500 group-hover:underline">
                       {bounty.title}
                     </h3>
+                    <span className="text-2xl font-cal text-orange-300 absolute top-2 right-2">
+                      ${bounty.value}
+                    </span>
                     <p className="text-sm text-gray-700">
-                      {bounty.description}
+                      {bounty.description.length > 50
+                        ? bounty.description.substring(0, 50) + "..."
+                        : bounty.description}
                     </p>
-                  </div>
+                  </a>
                 ))}
                 {project.bounties.length === 0 && (
                   <div className="border border-dashed border-orange-900 rounded p-4 col-span-3 text-orange-900 text-center">
@@ -101,6 +124,7 @@ export default function Index() {
               </div>
             </div>
           ))}
+          <Footer />
         </Shell>
       </SignedIn>
       <SignedOut>
@@ -110,9 +134,23 @@ export default function Index() {
   );
 }
 
-export const loader = async () => {
+export const loader = async (args) => {
+  const { userId } = await getAuth(args);
+  const clerkUser = await createClerkClient({
+    secretKey: process.env.CLERK_SECRET_KEY,
+  }).users.getUser(userId || "");
+
+  // Lookup the user with the Prisma client
+  const user = await prisma.user.findUnique({
+    where: { email: clerkUser.emailAddresses[0].emailAddress },
+  });
+
+  const projects = await prisma.project.findMany({
+    include: { bounties: true },
+  });
+
   if (process.env.LIVE === "true") {
-    return json(await prisma.project.findMany({ include: { bounties: true } }));
+    return json({ user, projects });
   } else {
     return json({ error: "Not in live mode" });
   }

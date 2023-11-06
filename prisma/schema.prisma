@@ -16,6 +16,8 @@ model User {
   name      String?
   type      Type     @default(REMOTE)
   confirmed Boolean  @default(false)
+  project   Project?  @relation(fields: [projectId], references: [id])
+  projectId Int?
   createdAt DateTime @default(now())
 }
 
@@ -29,12 +31,15 @@ model Project {
   name      String
   createdAt DateTime @default(now())
   bounties  Bounty[]
+  members   User[]
 }
 
 model Bounty {
   id          Int      @id @default(autoincrement())
   title       String
   description String?
+  github      String?
+  value       Int?
   createdAt   DateTime @default(now())
   project     Project @relation(fields: [projectId], references: [id])
   projectId   Int
