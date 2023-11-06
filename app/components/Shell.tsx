@@ -111,7 +111,7 @@ export default function Shell({ children, title }) {
                       </Disclosure.Button>
                     ))}
                   </div>
-                  <div className="border-t border-orange-700 pb-3 pt-4">
+                  <div className="pb-3 pt-4">
                     <div className="flex items-center px-5">
                       {/* <button
                         type="button"
