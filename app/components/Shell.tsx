@@ -86,7 +86,7 @@ export default function Shell({ children, title }) {
                         </button> */}
 
                         {/* Profile dropdown */}
-                        <UserButton />
+                        <UserButton afterSignOutUrl="/" />
                       </div>
                     </div>
                   </div>
@@ -123,7 +123,7 @@ export default function Shell({ children, title }) {
                       </button> */}
                     </div>
                     <div className="mt-3 space-y-1 px-2">
-                      <UserButton />
+                      <UserButton afterSignOutUrl="/" />
                     </div>
                   </div>
                 </Disclosure.Panel>

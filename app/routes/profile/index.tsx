@@ -26,7 +26,8 @@ export const action = async (args) => {
   const formData = await args.request.formData();
 
   const name = formData.get("name");
-  const email = formData.get("email") || clerkUser.emailAddresses[0].emailAddress;
+  const email =
+    formData.get("email") || clerkUser.emailAddresses[0].emailAddress;
   const type = formData.get("type");
 
   // Update the user with the Prisma client
@@ -36,8 +37,13 @@ export const action = async (args) => {
   });
 
   // Update the user in Clerk
-  const params = { firstName: name.split(" ")[0], lastName: name.split(" ")[1] };
-  const clerkUpdatedUser = await createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY }).users.updateUser(clerkUser.id, params);
+  const params = {
+    firstName: name.split(" ")[0],
+    lastName: name.split(" ")[1],
+  };
+  const clerkUpdatedUser = await createClerkClient({
+    secretKey: process.env.CLERK_SECRET_KEY,
+  }).users.updateUser(clerkUser.id, params);
 
   return redirect("/profile");
 };
@@ -123,7 +129,17 @@ export const loader = async (args) => {
     where: { email: clerkUser.emailAddresses[0].emailAddress },
   });
 
-  if (!user) throw new Response("Not Found", { status: 404 });
+  if (!user) {
+    const newUser = await prisma.user.create({
+      data: {
+        email: clerkUser.emailAddresses[0].emailAddress,
+        name: clerkUser.firstName + " " + clerkUser.lastName,
+        type: "REMOTE",
+      },
+    });
+
+    return json(newUser);
+  }
 
   return json(user);
 };
