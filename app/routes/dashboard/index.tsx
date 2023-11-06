@@ -44,15 +44,15 @@ export default function Index() {
                   </a>
                 </div>
                 <div className="border border-dashed border-orange-900 rounded px-4 py-2 text-orange-900">
-                  Follow us on{" "}
-                  <a href="/profile" className="font-semibold underline">
-                    Twitter (empty link)
+                  Share this on{" "}
+                  <a href="https://twitter.com/intent/tweet?text=I'm%20participating%20in%20OSShack%2C%20where%20you%20can%20earn%20prizes%20with%20bounties%20and%20challenges%20in%20open%20source%20projects.%20Join%20us%20on%20December%201-3%20remotely%20or%20in%20NYC!&url=https%3A%2F%2Fosshack.com" className="font-semibold underline">
+                    Twitter
                   </a>
                 </div>
                 <div className="border border-dashed border-orange-900 rounded px-4 py-2 text-orange-900">
-                  Join our{" "}
-                  <a href="/profile" className="font-semibold underline">
-                    Discord (empty link)
+                  Need help?{" "}
+                  <a href="mailto:bailey@pumfleet.co.uk" className="font-semibold underline">
+                    Get in touch
                   </a>
                 </div>
               </div>
