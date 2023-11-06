@@ -6,7 +6,12 @@ import prisma from "~/lib/prisma";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { getAuth } from "@clerk/remix/ssr.server";
 import { createClerkClient } from "@clerk/remix/api.server";
-import { CheckBadgeIcon, ClockIcon } from "@heroicons/react/20/solid";
+import {
+  ArrowRightIcon,
+  CheckBadgeIcon,
+  ClockIcon,
+} from "@heroicons/react/20/solid";
+import { CheckIcon, PencilIcon } from "@heroicons/react/24/solid";
 
 export const meta: MetaFunction = () => {
   return [
@@ -57,7 +62,76 @@ export default function Index() {
     <div>
       <SignedIn>
         <Shell title="Profile">
-          <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-8">
+          <>
+            {!user.confirmed ? (
+              <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-8">
+                Submit your application
+              </h2>
+            ) : (
+              <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-8">
+                You&apos;re all set!
+              </h2>
+            )}
+            <div className="grid md:grid-cols-3 gap-x-8">
+              <div className="p-5 text-center">
+                <div className="bg-green-600 rounded-full w-24 h-24 flex items-center mx-auto">
+                  <CheckIcon className="mx-auto w-12 h-12 text-white" />
+                </div>
+                <h3 className="text-2xl font-cal text-orange-900 mt-4">
+                  Sign up for a OSShack account
+                </h3>
+                <p className="text-gray-500 text-sm">
+                  Create an account and make sure your profile information is
+                  correct.
+                </p>
+              </div>
+              <div className="p-5 text-center">
+                {!user.confirmed ? (
+                  <div className="bg-orange-900 rounded-full w-24 h-24 flex items-center mx-auto">
+                    <PencilIcon className="mx-auto w-12 h-12 text-white" />
+                  </div>
+                ) : (
+                  <div className="bg-green-600 rounded-full w-24 h-24 flex items-center mx-auto">
+                    <CheckIcon className="mx-auto w-12 h-12 text-white" />
+                  </div>
+                )}
+                <h3 className="text-2xl font-cal text-orange-900 mt-4">
+                  Submit your application
+                </h3>
+                <p className="text-gray-500 text-sm mb-4">
+                  We&apos;ll ask a few questions about why you want to join the
+                  hackathon.
+                </p>
+                {!user.confirmed && (
+                  <a
+                    href="https://app.formbricks.com/s/clogohj01bm6aq70f11kf8dgr"
+                    className="text-orange-600 hover:text-orange-700 font-medium"
+                  >
+                    Complete application now{" "}
+                    <ArrowRightIcon className="w-4 h-4 inline-block" />
+                  </a>
+                )}
+              </div>
+              <div className="p-5 text-center">
+                {!user.confirmed ? (
+                  <div className="bg-orange-900 rounded-full w-24 h-24 flex items-center mx-auto">
+                    <CheckBadgeIcon className="mx-auto w-12 h-12 text-white" />
+                  </div>
+                ) : (
+                  <div className="bg-green-600 rounded-full w-24 h-24 flex items-center mx-auto">
+                    <CheckIcon className="mx-auto w-12 h-12 text-white" />
+                  </div>
+                )}
+                <h3 className="text-2xl font-cal text-orange-900 mt-4">
+                  Get approved
+                </h3>
+                <p className="text-gray-500 text-sm">
+                  Our team will shortly review and approve your application.
+                </p>
+              </div>
+            </div>
+          </>
+          <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl my-8">
             Update your details
           </h2>
           <Form method="post" className="space-y-4">
@@ -102,9 +176,13 @@ export default function Index() {
                 Status:
               </label>
               {user.confirmed ? (
-                <p className="text-green-400 font-semibold flex"><CheckBadgeIcon className="w-4 h-4 mr-1 mt-1" /> Confirmed</p>
+                <p className="text-green-400 font-semibold flex">
+                  <CheckBadgeIcon className="w-4 h-4 mr-1 mt-1" /> Confirmed
+                </p>
               ) : (
-                <p className="text-orange-400 font-semibold flex"><ClockIcon className="w-4 h-4 mr-1 mt-1" /> Unconfirmed</p>
+                <p className="text-orange-400 font-semibold flex">
+                  <ClockIcon className="w-4 h-4 mr-1 mt-1" /> Unconfirmed
+                </p>
               )}
             </div>
             <div>
