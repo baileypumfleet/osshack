@@ -7,6 +7,8 @@ import { useLoaderData } from "@remix-run/react";
 import { ClockIcon } from "@heroicons/react/24/solid";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
+import Sponsors from "../components/Sponsors";
+import Footer from "../components/Footer";
 dayjs.extend(relativeTime);
 
 export const meta: MetaFunction = () => {
@@ -57,6 +59,8 @@ export default function Index() {
                 </div>
               </div>
             </div>
+            <Sponsors />
+            <Footer />
           </Shell>
         </SignedIn>
         <SignedOut>
