@@ -2,17 +2,19 @@ import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { UserButton } from "@clerk/remix";
 import GradientHero from "~/routes/components/GradientHero";
+import { useMatches } from "@remix-run/react";
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", current: true },
-  { name: "Profile", href: "/profile", current: false },
+  { name: "Dashboard", href: "/dashboard" },
+  { name: "Profile", href: "/profile" },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Shell({ children }) {
+export default function Shell({ children, title }) {
+  const matches = useMatches();
   return (
     <>
       <div className="min-h-full">
@@ -41,7 +43,7 @@ export default function Shell({ children }) {
                               key={item.name}
                               href={item.href}
                               className={classNames(
-                                item.current
+                                matches[1].pathname === item.href
                                   ? "bg-orange-300 bg-opacity-25 text-white"
                                   : "text-white hover:bg-orange-500 hover:bg-opacity-25",
                                 "rounded-md py-2 px-3 text-sm font-medium"
@@ -131,7 +133,7 @@ export default function Shell({ children }) {
           <header className="py-10">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <h1 className="text-3xl font-bold tracking-tight text-white">
-                Dashboard
+                {title || "OSShack"}
               </h1>
             </div>
           </header>

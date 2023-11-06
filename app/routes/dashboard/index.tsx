@@ -27,7 +27,7 @@ export default function Index() {
     return (
       <div>
         <SignedIn>
-          <Shell>
+          <Shell title="Dashboard">
             <div className="py-16">
               <div className="mb-8 text-center">
                 <ClockIcon className="h-12 w-12 text-orange-900 mx-auto mb-4" />
