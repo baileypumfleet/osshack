@@ -6,6 +6,7 @@ import prisma from "~/lib/prisma";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { getAuth } from "@clerk/remix/ssr.server";
 import { createClerkClient } from "@clerk/remix/api.server";
+import { CheckBadgeIcon, ClockIcon } from "@heroicons/react/20/solid";
 
 export const meta: MetaFunction = () => {
   return [
@@ -95,6 +96,16 @@ export default function Index() {
                 <option value="IN_PERSON">In Person</option>
                 <option value="REMOTE">Remote</option>
               </select>
+            </div>
+            <div className="flex flex-col">
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Status:
+              </label>
+              {user.confirmed ? (
+                <p className="text-green-400 font-semibold flex"><CheckBadgeIcon className="w-4 h-4 mr-1 mt-1" /> Confirmed</p>
+              ) : (
+                <p className="text-orange-400 font-semibold flex"><ClockIcon className="w-4 h-4 mr-1 mt-1" /> Unconfirmed</p>
+              )}
             </div>
             <div>
               <button

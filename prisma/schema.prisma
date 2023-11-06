@@ -15,6 +15,7 @@ model User {
   email     String   @unique
   name      String?
   type      Type     @default(REMOTE)
+  confirmed Boolean  @default(false)
   createdAt DateTime @default(now())
 }
 
