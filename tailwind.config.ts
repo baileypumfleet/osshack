@@ -6,6 +6,7 @@ export default {
     extend: {
       fontFamily: {
         cal: ['Cal Sans', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
       },
     },
   },

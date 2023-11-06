@@ -7,7 +7,7 @@ export default function Team() {
             About
           </h2>
         </div>
-        <div className="flex mt-6 text-gray-900">
+        <div className="flex mt-6 text-gray-700">
           <div className="w-1/2 mr-8">
             OSShack is brought to you by Bailey Pumfleet, Jan Carbonell Llobet,
             Max Tave, Jacob Ioffe, Ana Medinac, Sydney Olejnik, Tahmid Kaze,
