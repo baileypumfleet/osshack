@@ -148,7 +148,7 @@ export default function Index() {
             </div>
             <div className="flex flex-col">
               <label className="block text-sm font-medium leading-6 text-gray-900">
-                Email:
+                Email
               </label>
               <input
                 type="email"
@@ -160,7 +160,7 @@ export default function Index() {
             </div>
             <div className="flex flex-col">
               <label className="block text-sm font-medium leading-6 text-gray-900">
-                Attendee type:
+                Attendee type
               </label>
               <select
                 name="type"
@@ -173,7 +173,7 @@ export default function Index() {
             </div>
             <div className="flex flex-col">
               <label className="block text-sm font-medium leading-6 text-gray-900">
-                Status:
+                Status
               </label>
               {user.confirmed ? (
                 <p className="text-green-400 font-semibold flex">
