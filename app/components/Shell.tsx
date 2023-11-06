@@ -1,21 +1,11 @@
 import { Disclosure } from "@headlessui/react";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { UserButton } from "@clerk/remix";
 import GradientHero from "~/routes/components/GradientHero";
 
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
+  { name: "Dashboard", href: "/dashboard", current: true },
+  { name: "Profile", href: "/profile", current: false },
 ];
 
 function classNames(...classes) {
@@ -53,7 +43,7 @@ export default function Shell({ children }) {
                               className={classNames(
                                 item.current
                                   ? "bg-orange-300 bg-opacity-25 text-white"
-                                  : "text-white hover:bg-orange-500 hover:bg-opacity-75",
+                                  : "text-white hover:bg-orange-500 hover:bg-opacity-25",
                                 "rounded-md py-2 px-3 text-sm font-medium"
                               )}
                               aria-current={item.current ? "page" : undefined}
@@ -84,14 +74,14 @@ export default function Shell({ children }) {
                     </div>
                     <div className="hidden lg:ml-4 lg:block">
                       <div className="flex items-center">
-                        <button
+                        {/* <button
                           type="button"
                           className="relative mr-4 flex-shrink-0 rounded-full p-1 text-orange-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-600"
                         >
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">View notifications</span>
                           <BellIcon className="h-6 w-6" aria-hidden="true" />
-                        </button>
+                        </button> */}
 
                         {/* Profile dropdown */}
                         <UserButton />
@@ -109,8 +99,8 @@ export default function Shell({ children }) {
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? "bg-orange-700 text-white"
-                            : "text-white hover:bg-orange-500 hover:bg-opacity-75",
+                            ? "bg-orange-300 bg-opacity-25 text-white"
+                            : "text-white hover:bg-orange-500 hover:bg-opacity-25",
                           "block rounded-md py-2 px-3 text-base font-medium"
                         )}
                         aria-current={item.current ? "page" : undefined}
@@ -121,29 +111,14 @@ export default function Shell({ children }) {
                   </div>
                   <div className="border-t border-orange-700 pb-3 pt-4">
                     <div className="flex items-center px-5">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="h-10 w-10 rounded-full"
-                          src={user.imageUrl}
-                          alt=""
-                        />
-                      </div>
-                      <div className="ml-3">
-                        <div className="text-base font-medium text-white">
-                          {user.name}
-                        </div>
-                        <div className="text-sm font-medium text-orange-300">
-                          {user.email}
-                        </div>
-                      </div>
-                      <button
+                      {/* <button
                         type="button"
                         className="relative ml-auto flex-shrink-0 rounded-full bg-orange-600 p-1 text-orange-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-600"
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
-                      </button>
+                      </button> */}
                     </div>
                     <div className="mt-3 space-y-1 px-2">
                       <UserButton />
