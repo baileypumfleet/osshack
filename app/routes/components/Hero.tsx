@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SignedIn, SignedOut } from "@clerk/remix";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import GradientHero from "./GradientHero";
@@ -49,12 +50,22 @@ export default function Hero() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-orange-200"
-            >
-              Log in <span aria-hidden="true">&rarr;</span>
-            </a>
+            <SignedIn>
+              <a
+                href="/dashboard"
+                className="text-sm font-semibold leading-6 text-orange-200"
+              >
+                Dashboard <span aria-hidden="true">&rarr;</span>
+              </a>
+            </SignedIn>
+            <SignedOut>
+              <a
+                href="/login"
+                className="text-sm font-semibold leading-6 text-orange-200"
+              >
+                Log in <span aria-hidden="true">&rarr;</span>
+              </a>
+            </SignedOut>
           </div>
         </nav>
         <Dialog
@@ -94,12 +105,22 @@ export default function Hero() {
                   ))}
                 </div>
                 <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Log in
-                  </a>
+                  <SignedIn>
+                    <a
+                      href="/dashboard"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Dashboard <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </SignedIn>
+                  <SignedOut>
+                    <a
+                      href="/login"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Log in <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </SignedOut>
                 </div>
               </div>
             </div>
@@ -136,18 +157,28 @@ export default function Hero() {
                     stake!
                   </p>
                   <div className="mt-10 flex items-center gap-x-6">
-                    <a
-                      href="/signup"
-                      className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
-                    >
-                      Join us in NYC
-                    </a>
-                    <a
-                      href="/signup"
-                      className="text-sm font-semibold leading-6 text-orange-100 hover:text-white"
-                    >
-                      Join remotely
-                    </a>
+                    <SignedIn>
+                      <a
+                        href="/dashboard"
+                        className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+                      >
+                        Go to your dashboard
+                      </a>
+                    </SignedIn>
+                    <SignedOut>
+                      <a
+                        href="/signup"
+                        className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+                      >
+                        Join us in NYC
+                      </a>
+                      <a
+                        href="/signup"
+                        className="text-sm font-semibold leading-6 text-orange-100 hover:text-white"
+                      >
+                        Join remotely
+                      </a>
+                    </SignedOut>
                   </div>
                 </div>
                 <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
