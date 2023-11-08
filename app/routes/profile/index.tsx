@@ -104,7 +104,7 @@ export default function Index() {
                 </p>
                 {!user.confirmed && (
                   <a
-                    href="https://app.formbricks.com/s/clogohj01bm6aq70f11kf8dgr"
+                    href="https://forms.gle/NivBsEkKB6Biantr9"
                     className="text-orange-600 hover:text-orange-700 font-medium"
                   >
                     Complete application now{" "}
