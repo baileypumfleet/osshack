@@ -147,6 +147,7 @@ export const loader = async (args) => {
 
   const projects = await prisma.project.findMany({
     include: { bounties: true },
+    orderBy: { id: "asc" },
   });
 
   return json({ user, projects });
