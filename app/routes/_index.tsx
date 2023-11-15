@@ -1,12 +1,12 @@
 import type { MetaFunction } from "@remix-run/node";
-import Hero from "./components/Hero";
-import Sponsors from "./components/Sponsors";
-import WhyJoin from "./components/WhyJoin";
-import Date from "./components/Date";
-import Schedule from "./components/Schedule";
-import SignupCTA from "./components/SignupCTA";
-import Team from "./components/Team";
-import Footer from "./components/Footer";
+import Hero from "../components/Hero";
+import Sponsors from "../components/Sponsors";
+import WhyJoin from "../components/WhyJoin";
+import Date from "../components/Date";
+import Schedule from "../components/Schedule";
+import SignupCTA from "../components/SignupCTA";
+import Team from "../components/Team";
+import Footer from "../components/Footer";
 
 export const meta: MetaFunction = () => {
   return [

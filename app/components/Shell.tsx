@@ -1,7 +1,7 @@
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { UserButton } from "@clerk/remix";
-import GradientHero from "~/routes/components/GradientHero";
+import GradientHero from "~/components/GradientHero";
 import { Link, useMatches } from "@remix-run/react";
 
 const navigation = [
