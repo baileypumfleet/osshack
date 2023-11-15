@@ -6,6 +6,7 @@ import { Form, useLoaderData, useParams } from "@remix-run/react";
 import Shell from "~/components/Shell";
 import prisma from "~/lib/prisma";
 import Markdown from "react-markdown";
+import Footer from "~/components/Footer";
 
 export const meta: MetaFunction = () => {
   return [
@@ -74,6 +75,7 @@ export default function Bounty() {
               </Form>
             </div>
           </div>
+          <Footer />
         </Shell>
       </SignedIn>
       <SignedOut>
