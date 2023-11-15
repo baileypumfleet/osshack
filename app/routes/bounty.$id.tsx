@@ -5,6 +5,7 @@ import type { MetaFunction } from "@remix-run/react";
 import { Form, useLoaderData, useParams } from "@remix-run/react";
 import Shell from "~/components/Shell";
 import prisma from "~/lib/prisma";
+import Markdown from "react-markdown";
 
 export const meta: MetaFunction = () => {
   return [
@@ -42,7 +43,9 @@ export default function Bounty() {
               <h2 className="text-3xl font-cal text-orange-900 mb-2">
                 Description
               </h2>
-              {data.bounty?.description}
+              <div className="prose prose-headings:font-cal prose-headings:text-orange-900 prose-headings:mb-2 prose-headings:font-normal">
+                <Markdown>{data.bounty?.description}</Markdown>
+              </div>
             </div>
             <div>
               <h2 className="text-3xl font-cal text-orange-900 mb-2">Reward</h2>
@@ -61,7 +64,10 @@ export default function Bounty() {
 
               <Form method="post">
                 <input type="hidden" name="bounty" value={params.id} />
-                <button type="submit" className="mt-4 text-red-600 bg-red-100 px-4 py-2 rounded-lg flex font-medium">
+                <button
+                  type="submit"
+                  className="mt-4 text-red-600 bg-red-100 px-4 py-2 rounded-lg flex font-medium"
+                >
                   <TrashIcon className="h-5 w-5 mr-1 mt-0.5" />
                   Delete bounty
                 </button>
