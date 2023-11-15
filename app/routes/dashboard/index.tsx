@@ -27,7 +27,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   const data = useLoaderData<typeof loader>();
 
-  if (data.error) {
+  if (!data.user?.projectId) {
     return (
       <div>
         <SignedIn>
@@ -149,9 +149,5 @@ export const loader = async (args) => {
     include: { bounties: true },
   });
 
-  if (process.env.LIVE === "true") {
-    return json({ user, projects });
-  } else {
-    return json({ error: "Not in live mode" });
-  }
+  return json({ user, projects });
 };
