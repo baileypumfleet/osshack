@@ -25,7 +25,7 @@ export default function Index() {
       <Schedule />
       <SignupCTA />
       <Team />
-      <Footer />
+      <Footer padding={true} />
     </main>
   );
 }
