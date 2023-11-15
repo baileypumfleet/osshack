@@ -3,6 +3,7 @@ import { SignedIn, SignedOut } from "@clerk/remix";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import GradientHero from "./GradientHero";
+import { Link } from "@remix-run/react";
 
 const navigation = [
   { name: "Sponsors", href: "#sponsors" },
@@ -22,11 +23,11 @@ export default function Hero() {
           aria-label="Global"
         >
           <div className="flex lg:flex-1">
-            <a href="/" className="-m-1.5 p-1.5">
+            <Link to="/" className="-m-1.5 p-1.5">
               <p className="font-cal text-white tracking-wide text-2xl">
                 OSS<span className="opacity-50">hack</span>
               </p>
-            </a>
+            </Link>
           </div>
           <div className="flex lg:hidden">
             <button
@@ -40,31 +41,31 @@ export default function Hero() {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className="text-sm font-semibold leading-6 text-orange-100"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <SignedIn>
-              <a
-                href="/dashboard"
+              <Link
+                to="/dashboard"
                 className="text-sm font-semibold leading-6 text-orange-200"
               >
                 Dashboard <span aria-hidden="true">&rarr;</span>
-              </a>
+              </Link>
             </SignedIn>
             <SignedOut>
-              <a
-                href="/login"
+              <Link
+                to="/login"
                 className="text-sm font-semibold leading-6 text-orange-200"
               >
                 Log in <span aria-hidden="true">&rarr;</span>
-              </a>
+              </Link>
             </SignedOut>
           </div>
         </nav>
@@ -77,11 +78,11 @@ export default function Hero() {
           <div className="fixed inset-0 z-50" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-orange-100/10">
             <div className="flex items-center justify-between">
-              <a href="/" className="-m-1.5 p-1.5 outline-none">
+              <Link to="/" className="-m-1.5 p-1.5 outline-none">
                 <p className="font-cal text-orange-400 tracking-wide text-2xl">
                   OSS<span className="opacity-50">hack</span>
                 </p>
-              </a>
+              </Link>
               <button
                 type="button"
                 className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -95,31 +96,31 @@ export default function Hero() {
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
                   {navigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
                 <div className="py-6">
                   <SignedIn>
-                    <a
-                      href="/dashboard"
+                    <Link
+                      to="/dashboard"
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       Dashboard <span aria-hidden="true">&rarr;</span>
-                    </a>
+                    </Link>
                   </SignedIn>
                   <SignedOut>
-                    <a
-                      href="/login"
+                    <Link
+                      to="/login"
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       Log in <span aria-hidden="true">&rarr;</span>
-                    </a>
+                    </Link>
                   </SignedOut>
                 </div>
               </div>
@@ -158,26 +159,26 @@ export default function Hero() {
                   </p>
                   <div className="mt-10 flex items-center gap-x-6">
                     <SignedIn>
-                      <a
-                        href="/dashboard"
+                      <Link
+                        to="/dashboard"
                         className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
                       >
                         Go to your dashboard
-                      </a>
+                      </Link>
                     </SignedIn>
                     <SignedOut>
-                      <a
-                        href="/signup"
+                      <Link
+                        to="/signup"
                         className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
                       >
                         Sign up to participate
-                      </a>
-                      <a
-                        href="mailto:bailey@cal.com"
+                      </Link>
+                      <Link
+                        to="mailto:bailey@cal.com"
                         className="text-sm font-semibold leading-6 text-orange-100 hover:text-white"
                       >
                         Sponsor OSShack
-                      </a>
+                      </Link>
                     </SignedOut>
                   </div>
                 </div>

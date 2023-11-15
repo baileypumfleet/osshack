@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
 import Sponsors from "../components/Sponsors";
 import Footer from "../components/Footer";
+import { Link } from "@remix-run/react";
 import { getAuth } from "@clerk/remix/ssr.server";
 import { createClerkClient } from "@clerk/remix/api.server";
 dayjs.extend(relativeTime);
@@ -43,9 +44,9 @@ export default function Index() {
               <div className="grid grid-cols-3 gap-4">
                 <div className="border border-dashed border-orange-900 rounded px-4 py-2 text-orange-900">
                   Fill out your details on{" "}
-                  <a href="/profile" className="font-semibold underline">
+                  <Link to="/profile" className="font-semibold underline">
                     the profile page
-                  </a>
+                  </Link>
                 </div>
                 <div className="border border-dashed border-orange-900 rounded px-4 py-2 text-orange-900">
                   Share this on{" "}
@@ -87,18 +88,18 @@ export default function Index() {
                 {project.name}
               </h2>
               {data.user.projectId === project.id && (
-                <a
-                  href="/dashboard/new"
+                <Link
+                  to="/dashboard/new"
                   className="text-orange-500 hover:text-orange-700 text-xl font-cal"
                 >
                   <PencilSquareIcon className="w-4 h-4 mb-0.5 inline-block" />{" "}
                   Create a new bounty
-                </a>
+                </Link>
               )}
               <div className="grid grid-cols-3 gap-4 mt-4">
                 {project.bounties.map((bounty) => (
-                  <a
-                    href={`/bounty/${bounty.id}`}
+                  <Link
+                    to={`/bounty/${bounty.id}`}
                     key={bounty.id}
                     className="border border-dashed border-orange-900 hover:border-orange-500 group rounded p-4 relative"
                   >
@@ -113,7 +114,7 @@ export default function Index() {
                         ? bounty.description.substring(0, 50) + "..."
                         : bounty.description}
                     </p>
-                  </a>
+                  </Link>
                 ))}
                 {project.bounties.length === 0 && (
                   <div className="border border-dashed border-orange-900 rounded p-4 col-span-3 text-orange-900 text-center">

@@ -1,8 +1,8 @@
 import { Disclosure } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { UserButton } from "@clerk/remix";
 import GradientHero from "~/routes/components/GradientHero";
-import { useMatches } from "@remix-run/react";
+import { Link, useMatches } from "@remix-run/react";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard" },
@@ -30,18 +30,18 @@ export default function Shell({ children, title }) {
                   <div className="relative flex h-16 items-center justify-between lg:border-b lg:border-orange-400 lg:border-opacity-25">
                     <div className="flex items-center px-2 lg:px-0">
                       <div className="flex-shrink-0">
-                        <a href="/" className="-m-1.5 p-1.5">
+                        <Link to="/" className="-m-1.5 p-1.5">
                           <p className="font-cal text-white tracking-wide text-2xl">
                             OSS<span className="opacity-50">hack</span>
                           </p>
-                        </a>
+                        </Link>
                       </div>
                       <div className="hidden lg:ml-10 lg:block">
                         <div className="flex space-x-4">
                           {navigation.map((item) => (
-                            <a
+                            <Link
                               key={item.name}
-                              href={item.href}
+                              to={item.href}
                               className={classNames(
                                 matches[1].pathname === item.href
                                   ? "bg-orange-300 bg-opacity-25 text-white"
@@ -51,7 +51,7 @@ export default function Shell({ children, title }) {
                               aria-current={item.current ? "page" : undefined}
                             >
                               {item.name}
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       </div>

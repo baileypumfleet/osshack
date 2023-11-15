@@ -1,3 +1,5 @@
+import { Link } from "@remix-run/react";
+
 export default function Date() {
   return (
     <div className="py-12">
@@ -11,12 +13,12 @@ export default function Date() {
           </p>
         </div>
         <div className="pt-6 w-1/3 relative">
-          <a
-            href="/signup"
+          <Link
+            to="/signup"
             className="absolute right-0 rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-orange-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
           >
             Register for OSShack
-          </a>
+          </Link>
         </div>
       </div>
     </div>
