@@ -55,8 +55,6 @@ export const action = async (args) => {
 export default function New() {
   const actionData = useActionData();
   const data = useLoaderData<typeof loader>();
-  
-  console.log(data.issues);
 
   return (
     <div>
@@ -182,8 +180,8 @@ export const loader = async (args) => {
   });
 
   const issues = await octokit.request("GET /repos/{owner}/{repo}/issues", {
-    owner: "calcom",
-    repo: "cal.com",
+    owner: user?.project?.repo?.split("/")[0] || "calcom",
+    repo: user?.project?.repo?.split("/")[1] || "cal.com",
   });
 
   return json({ user, issues });

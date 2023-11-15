@@ -29,6 +29,7 @@ enum Type {
 model Project {
   id        Int      @id @default(autoincrement())
   name      String
+  repo      String?
   createdAt DateTime @default(now())
   bounties  Bounty[]
   members   User[]
