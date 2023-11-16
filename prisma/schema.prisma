@@ -30,6 +30,7 @@ model Project {
   id        Int      @id @default(autoincrement())
   name      String
   repo      String?
+  budget    Int?
   createdAt DateTime @default(now())
   bounties  Bounty[]
   members   User[]

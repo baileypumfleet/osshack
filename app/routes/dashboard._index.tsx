@@ -3,7 +3,7 @@ import type { MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import Shell from "~/components/Shell";
 import prisma from "~/lib/prisma";
-import { useLoaderData , Link } from "@remix-run/react";
+import { useLoaderData, Link } from "@remix-run/react";
 import { ClockIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
@@ -86,14 +86,23 @@ export default function Index() {
               <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-4">
                 {project.name}
               </h2>
-              {data.user.projectId === project.id && (
-                <Link
-                  to="/dashboard/new"
-                  className="text-orange-500 hover:text-orange-700 text-xl font-cal"
-                >
-                  <PencilSquareIcon className="w-4 h-4 mb-0.5 inline-block" />{" "}
-                  Create a new bounty
-                </Link>
+              {data.user?.projectId === project.id && (
+                <div className="flex">
+                  <Link
+                    to="/dashboard/new"
+                    className="text-orange-500 hover:text-orange-700 text-xl font-cal"
+                  >
+                    <PencilSquareIcon className="w-4 h-4 mb-0.5 inline-block" />{" "}
+                    Create a new bounty
+                  </Link>
+                  <div className="ml-auto pt-0.5">
+                    {data.allocated && data.allocated > 0 && (
+                      <span className="text-orange-900 text-xl font-cal">
+                        ${data.allocated} out of ${project.budget} allocated
+                      </span>
+                    )}
+                  </div>
+                </div>
               )}
               <div className="grid grid-cols-3 gap-4 mt-4">
                 {project.bounties.map((bounty) => (
@@ -150,5 +159,14 @@ export const loader = async (args) => {
     orderBy: { id: "asc" },
   });
 
-  return json({ user, projects });
+  const totalValue = await prisma.bounty.aggregate({
+    where: {
+      projectId: user?.projectId || 1,
+    },
+    _sum: {
+      value: true, // Sum up the 'value' field
+    },
+  });
+
+  return json({ user, projects, allocated: totalValue._sum.value });
 };
