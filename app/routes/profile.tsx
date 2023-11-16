@@ -34,12 +34,13 @@ export const action = async (args) => {
   const name = formData.get("name");
   const email =
     formData.get("email") || clerkUser.emailAddresses[0].emailAddress;
+  const github = formData.get("github");
   const type = formData.get("type");
 
   // Update the user with the Prisma client
   const updatedUser = await prisma.user.update({
     where: { email: clerkUser.emailAddresses[0].emailAddress },
-    data: { name, email, type },
+    data: { name, email, github, type },
   });
 
   // Update the user in Clerk
@@ -156,6 +157,17 @@ export default function Index() {
                 defaultValue={user.email}
                 className="cursor-not-allowed block w-full rounded-md border-0 px-4 py-1.5 outline-none text-gray-400 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 disabled={true}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                GitHub Username
+              </label>
+              <input
+                type="text"
+                name="github"
+                defaultValue={user.github || ""}
+                className="block w-full rounded-md border-0 px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
               />
             </div>
             <div className="flex flex-col">

@@ -11,6 +11,7 @@ import Sponsors from "../components/Sponsors";
 import Footer from "../components/Footer";
 import { getAuth } from "@clerk/remix/ssr.server";
 import { createClerkClient } from "@clerk/remix/api.server";
+import { ExclamationTriangleIcon, MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/20/solid";
 dayjs.extend(relativeTime);
 
 export const meta: MetaFunction = () => {
@@ -95,6 +96,13 @@ export default function Index() {
                     <PencilSquareIcon className="w-4 h-4 mb-0.5 inline-block" />{" "}
                     Create a new bounty
                   </Link>
+                  <Link
+                    to="/review"
+                    className="text-orange-500 hover:text-orange-700 text-xl font-cal ml-4"
+                  >
+                    <MagnifyingGlassIcon className="w-4 h-4 mb-0.5 inline-block" />{" "}
+                    Review submissions
+                  </Link>
                   <div className="ml-auto pt-0.5">
                     {data.allocated && data.allocated > 0 && (
                       <span className="text-orange-900 text-xl font-cal">
@@ -109,14 +117,28 @@ export default function Index() {
                   <Link
                     to={`/bounty/${bounty.id}`}
                     key={bounty.id}
-                    className="border border-dashed border-orange-900 hover:border-orange-500 group rounded p-4 relative"
+                    className="border border-dashed border-orange-900 hover:border-orange-500 group rounded px-4 py-2 relative"
                   >
-                    <h3 className="text-2xl font-cal text-orange-900 group-hover:text-orange-500 group-hover:underline">
+                    <h3 className="text-2xl font-cal text-orange-900 group-hover:text-orange-500 group-hover:underline pr-16">
                       {bounty.title}
                     </h3>
-                    <span className="text-2xl font-cal text-orange-300 absolute top-2 right-2">
-                      ${bounty.value}
-                    </span>
+                    {bounty.submissions.filter((submission) => submission.status === "APPROVED").length !== 0 && (
+                      <span className="text-xl font-cal text-red-400 absolute top-2 right-2">
+                        <XCircleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
+                        Closed
+                      </span>
+                    )}
+                    {bounty.submissions.filter((submission) => submission.status === "SUBMITTED").length !== 0 && (
+                      <span className="text-xl font-cal text-yellow-400 absolute top-2 right-2">
+                        <ExclamationTriangleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
+                        Submitted
+                      </span>
+                    )}
+                    {bounty.submissions.filter((submission) => submission.status === "SUBMITTED").length === 0 && bounty.submissions.filter((submission) => submission.status === "APPROVED").length === 0 && (
+                      <span className="text-2xl font-cal text-orange-300 absolute top-2 right-2">
+                        ${bounty.value}
+                      </span>
+                    )}
                     <p className="text-sm text-gray-700">
                       {bounty.description.length > 50
                         ? bounty.description.substring(0, 50) + "..."
@@ -155,7 +177,7 @@ export const loader = async (args) => {
   });
 
   const projects = await prisma.project.findMany({
-    include: { bounties: true },
+    include: { bounties: { include: { submissions: true } } },
     orderBy: { id: "asc" },
   });
 
