@@ -3,11 +3,17 @@ import type { MetaFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import Shell from "~/components/Shell";
 import prisma from "~/lib/prisma";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import {
+  Form,
+  useActionData,
+  useLoaderData,
+  useSearchParams,
+} from "@remix-run/react";
 import Footer from "../components/Footer";
 import { getAuth } from "@clerk/remix/ssr.server";
 import { createClerkClient } from "@clerk/remix/api.server";
 import { Octokit } from "octokit";
+import { useEffect, useState } from "react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -55,6 +61,14 @@ export const action = async (args) => {
 export default function New() {
   const actionData = useActionData();
   const data = useLoaderData<typeof loader>();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [loading, isLoading] = useState(false);
+
+  useEffect(() => {
+    if (data.issues) {
+      isLoading(false);
+    }
+  }, [data.issues]);
 
   return (
     <div>
@@ -63,14 +77,87 @@ export default function New() {
           <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl my-8">
             Automatically create from GitHub
           </h2>
+          <div className="bg-white rounded-md text-gray-900 text-sm shadow-sm px-4 py-3 mb-4 flex">
+            <div className="border-r pr-4 text-gray-500">
+              Showing issues from{" "}
+              <span className="font-medium text-gray-900">
+                {data.issues.url.split("/")[4]}/{data.issues.url.split("/")[5]}
+              </span>
+            </div>
+            <div className="ml-auto px-4 text-orange-900 font-medium">
+              <button
+                onClick={() => {
+                  isLoading(true);
+                  setSearchParams((prev) => {
+                    // Get the current page number, or default to 1 if it's not set
+                    const currentPage = parseInt(prev.get("page") || "1");
+                    // Set the page parameter to the current page number plus one
+                    prev.set("page", (currentPage - 1).toString());
+                    return prev;
+                  });
+                }}
+              >
+                Previous
+              </button>
+            </div>
+            <div className="border-l px-4 text-gray-500">
+              Page{" "}
+              <span className="font-medium text-gray-900">
+                {searchParams.get("page") || "1"}
+              </span>
+            </div>
+            <div className="border-l pl-4 text-orange-900 font-medium">
+              <button
+                onClick={() => {
+                  isLoading(true);
+                  setSearchParams((prev) => {
+                    // Get the current page number, or default to 1 if it's not set
+                    const currentPage = parseInt(prev.get("page") || "1");
+                    // Set the page parameter to the current page number plus one
+                    prev.set("page", (currentPage + 1).toString());
+                    return prev;
+                  });
+                }}
+              >
+                Next
+              </button>
+            </div>
+          </div>
           <div className="bg-white rounded-md text-gray-900 text-sm shadow-sm py-1">
+            {loading && (
+              <div className="w-full h-screen bg-white z-50 text-center pt-24">
+                <div role="status">
+                  <svg
+                    aria-hidden="true"
+                    className="inline w-16 h-16 text-gray-200 animate-spin dark:text-gray-600 fill-orange-600"
+                    viewBox="0 0 100 101"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                      fill="currentFill"
+                    />
+                  </svg>
+                  <span className="block mt-4 font-cal text-orange-900 text-2xl">Fetching issues</span>
+                </div>
+              </div>
+            )}
             {data.issues?.data?.map((issue) => (
               <div key={issue.id} className="px-4 py-2 border-b flex">
                 <div className="font-medium pt-1.5">{issue.title}</div>
                 <div className="ml-auto">
                   <Form method="post">
                     <input type="hidden" name="title" value={issue.title} />
-                    <input type="hidden" name="description" value={issue.body || "Unknown"} />
+                    <input
+                      type="hidden"
+                      name="description"
+                      value={issue.body || "Unknown"}
+                    />
                     <input type="hidden" name="github" value={issue.html_url} />
                     <input
                       type="number"
@@ -179,9 +266,13 @@ export const loader = async (args) => {
     },
   });
 
+  const url = new URL(args.request.url);
+  const page = url.searchParams.get("page");
+
   const issues = await octokit.request("GET /repos/{owner}/{repo}/issues", {
     owner: user?.project?.repo?.split("/")[0] || "calcom",
     repo: user?.project?.repo?.split("/")[1] || "cal.com",
+    page: parseInt(page || "1"),
   });
 
   return json({ user, issues });
