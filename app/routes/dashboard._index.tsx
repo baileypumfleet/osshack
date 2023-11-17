@@ -123,13 +123,13 @@ export default function Index() {
                       {bounty.title}
                     </h3>
                     {bounty.submissions.filter((submission) => submission.status === "APPROVED").length !== 0 && (
-                      <span className="text-xl font-cal text-red-400 absolute top-2 right-2">
+                      <span className="text-xl font-cal text-red-400 bg-orange-50 absolute top-2 right-2">
                         <XCircleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
                         Closed
                       </span>
                     )}
                     {bounty.submissions.filter((submission) => submission.status === "SUBMITTED").length !== 0 && (
-                      <span className="text-xl font-cal text-yellow-400 absolute top-2 right-2">
+                      <span className="text-xl font-cal text-yellow-400 bg-orange-50 absolute top-2 right-2">
                         <ExclamationTriangleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
                         Submitted
                       </span>
@@ -139,8 +139,8 @@ export default function Index() {
                         ${bounty.value}
                       </span>
                     )}
-                    <p className="text-sm text-gray-700">
-                      {bounty.description.length > 50
+                    <p className="text-sm text-gray-700 overflow-x-hidden">
+                      {bounty.description && bounty.description.length > 50
                         ? bounty.description.substring(0, 50) + "..."
                         : bounty.description}
                     </p>
