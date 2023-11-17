@@ -8,6 +8,8 @@ import Footer from "../components/Footer";
 import { getAuth } from "@clerk/remix/ssr.server";
 import { createClerkClient } from "@clerk/remix/api.server";
 import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
+import api from "api";
+import dayjs from "dayjs";
 
 export const meta: MetaFunction = () => {
   return [
@@ -26,6 +28,7 @@ export const action = async (args) => {
   const action = formData.get("action");
 
   if (action === "APPROVED") {
+    // Approve the submission
     await prisma.submission.update({
       where: { id: parseInt(submission) },
       data: {
@@ -33,17 +36,39 @@ export const action = async (args) => {
       },
     });
 
+    // Get the bounty
     const newSubmission = await prisma.submission.findUnique({
       where: { id: parseInt(submission) },
-      include: { bounty: true },
+      include: { bounty: true, user: true },
     });
 
+    // Close the bounty
     await prisma.bounty.update({
       where: { id: newSubmission?.bounty.id },
       data: {
         status: "CLOSED",
       },
     });
+
+    // Send the reward
+    const tremendous = api("@tremendous/v2#9dcd4v73lp166awy");
+    tremendous.auth(process.env.TREMENDOUS_TOKEN);
+
+    if (process.env.TREMENDOUS_PRODUCTION === "true") {
+      tremendous.server("https://www.tremendous.com/api/v2");
+    }
+
+    await tremendous.coreOrdersCreate({
+      external_id: newSubmission?.id,
+      payment: {funding_source_id: process.env.TREMENDOUS_FUNDING_SOURCE, channel: "API"},
+      reward: {
+        campaign_id: process.env.TREMENDOUS_CAMPAIGN_ID,
+        value: {denomination: newSubmission?.bounty.value, currency_code: "USD"},
+        recipient: {name: newSubmission?.user.name, email: newSubmission?.user.email},
+        deliver_at: dayjs().format("YYYY-MM-DD"),
+        delivery: {method: "EMAIL"},
+      }
+    })
   } else if (action === "REJECTED") {
     // Delete the submission
     await prisma.submission.delete({
@@ -94,49 +119,63 @@ export default function Review() {
                 {!bounty.submissions.length && (
                   <div className="text-gray-700">No submissions yet.</div>
                 )}
-                {bounty.submissions.filter((submission) => submission.status === "APPROVED").length > 0 && (
-                    <div className="text-gray-700">This bounty is now closed.</div>
+                {bounty.submissions.filter(
+                  (submission) => submission.status === "APPROVED"
+                ).length > 0 && (
+                  <div className="text-gray-700">
+                    This bounty is now closed.
+                  </div>
                 )}
                 <div className="bg-white rounded-md text-gray-900 text-sm shadow-sm">
-                  {bounty.submissions.filter((submission) => submission.status === "SUBMITTED").map((submission) => (
-                    <div
-                      key={submission.id}
-                      className="px-4 py-2 border-b flex"
-                    >
-                      <a
-                        href={submission.url}
-                        className="text-orange-600 font-medium hover:underline mt-0.5"
-                        target="_blank"
-                        rel="noreferrer"
+                  {bounty.submissions
+                    .filter((submission) => submission.status === "SUBMITTED")
+                    .map((submission) => (
+                      <div
+                        key={submission.id}
+                        className="px-4 py-2 border-b flex"
                       >
-                        {submission.url}
-                      </a>
-                      <div className="ml-auto flex space-x-2">
-                        <Form method="post">
-                          <input
-                            type="hidden"
-                            name="submission"
-                            value={submission.id}
-                          />
-                          <input type="hidden" name="action" value="APPROVED" />
-                          <button className="rounded-md border border-orange-600 bg-orange-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline">
-                            Approve
-                          </button>
-                        </Form>
-                        <Form method="post">
-                          <input
-                            type="hidden"
-                            name="submission"
-                            value={submission.id}
-                          />
-                          <input type="hidden" name="action" value="REJECTED" />
-                          <button className="rounded-md border border-red-100 bg-red-50 px-2 py-1 text-xs font-semibold text-red-600 shadow-sm hover:bg-red-100 focus-visible:outline">
-                            Reject
-                          </button>
-                        </Form>
+                        <a
+                          href={submission.url}
+                          className="text-orange-600 font-medium hover:underline mt-0.5"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {submission.url}
+                        </a>
+                        <div className="ml-auto flex space-x-2">
+                          <Form method="post">
+                            <input
+                              type="hidden"
+                              name="submission"
+                              value={submission.id}
+                            />
+                            <input
+                              type="hidden"
+                              name="action"
+                              value="APPROVED"
+                            />
+                            <button className="rounded-md border border-orange-600 bg-orange-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline">
+                              Approve
+                            </button>
+                          </Form>
+                          <Form method="post">
+                            <input
+                              type="hidden"
+                              name="submission"
+                              value={submission.id}
+                            />
+                            <input
+                              type="hidden"
+                              name="action"
+                              value="REJECTED"
+                            />
+                            <button className="rounded-md border border-red-100 bg-red-50 px-2 py-1 text-xs font-semibold text-red-600 shadow-sm hover:bg-red-100 focus-visible:outline">
+                              Reject
+                            </button>
+                          </Form>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </div>
             ))}
