@@ -93,7 +93,7 @@ export default function Bounty() {
               ).length === 0 ? (
                 <>
                   <p className="text-gray-700">
-                    If you&apos;re ready to submit your attempt at this bounty,
+                    If you&apos;re ready to submit your attempt at this {data.bounty?.type && data.bounty?.type.toLowerCase()},
                     please make sure the following is completed:
                     <ul className="list-disc ml-8 mt-2 text-gray-500 space-y-1">
                       <li>

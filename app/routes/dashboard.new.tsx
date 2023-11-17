@@ -43,6 +43,7 @@ export const action = async (args) => {
   const description = formData.get("description");
   const value = formData.get("reward");
   const github = formData.get("github");
+  const type = formData.get("type");
 
   // Update the user with the Prisma client
   await prisma.bounty.create({
@@ -50,6 +51,7 @@ export const action = async (args) => {
       title,
       description,
       github,
+      type,
       value: parseInt(value as string),
       project: { connect: { id: user?.projectId || 1 } },
     },
@@ -159,6 +161,7 @@ export default function New() {
                       value={issue.body || "Unknown"}
                     />
                     <input type="hidden" name="github" value={issue.html_url} />
+                    <input type="hidden" name="type" value="BOUNTY" />
                     <input
                       type="number"
                       name="reward"
@@ -180,7 +183,7 @@ export default function New() {
             </div>
           </div>
           <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-8 mt-16">
-            Manually create a bounty for {data.user?.project?.name || "Unknown"}
+            Manually create a bounty or submission
           </h2>
           <Form method="post" className="space-y-4">
             <div className="flex flex-col">
@@ -217,6 +220,18 @@ export default function New() {
             </div>
             <div className="flex flex-col">
               <label className="block text-sm font-medium leading-6 text-gray-900">
+                Type
+              </label>
+              <select
+                name="type"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm outline-none sm:max-w-xs sm:text-sm sm:leading-6"
+              >
+                <option value="BOUNTY">Bounty (one person works on one task)</option>
+                <option value="CHALLENGE">Challenge (multiple people submit different attemps to one task)</option>
+              </select>
+            </div>
+            <div className="flex flex-col">
+              <label className="block text-sm font-medium leading-6 text-gray-900">
                 Reward
               </label>
               <input
@@ -231,7 +246,7 @@ export default function New() {
                 type="submit"
                 className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
               >
-                Create bounty
+                Create and publish
               </button>
             </div>
 

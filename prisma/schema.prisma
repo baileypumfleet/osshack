@@ -44,11 +44,17 @@ model Bounty {
   description String?
   github      String?
   value       Int?
+  type        BountyType   @default(BOUNTY)
   status      Status       @default(OPEN)
   createdAt   DateTime     @default(now())
   project     Project      @relation(fields: [projectId], references: [id])
   projectId   Int
   submissions Submission[]
+}
+
+enum BountyType {
+  BOUNTY
+  CHALLENGE
 }
 
 enum Status {

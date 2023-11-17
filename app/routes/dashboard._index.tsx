@@ -11,7 +11,11 @@ import Sponsors from "../components/Sponsors";
 import Footer from "../components/Footer";
 import { getAuth } from "@clerk/remix/ssr.server";
 import { createClerkClient } from "@clerk/remix/api.server";
-import { ExclamationTriangleIcon, MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/20/solid";
+import {
+  ExclamationTriangleIcon,
+  MagnifyingGlassIcon,
+  XCircleIcon,
+} from "@heroicons/react/20/solid";
 dayjs.extend(relativeTime);
 
 export const meta: MetaFunction = () => {
@@ -112,40 +116,106 @@ export default function Index() {
                   </div>
                 </div>
               )}
+              {project.bounties.filter((bounty) => bounty.type === "CHALLENGE")
+                .length > 0 && (
+                <h3 className="text-xl font-cal text-orange-900 sm:text-3xl my-4">
+                  Challenges
+                </h3>
+              )}
               <div className="grid grid-cols-3 gap-4 mt-4">
-                {project.bounties.map((bounty) => (
-                  <Link
-                    to={`/bounty/${bounty.id}`}
-                    key={bounty.id}
-                    className="border border-dashed border-orange-900 hover:border-orange-500 group rounded px-4 py-2 relative"
-                  >
-                    <h3 className="text-2xl font-cal text-orange-900 group-hover:text-orange-500 group-hover:underline pr-16">
-                      {bounty.title}
-                    </h3>
-                    {bounty.submissions.filter((submission) => submission.status === "APPROVED").length !== 0 && (
-                      <span className="text-xl font-cal text-red-400 bg-orange-50 absolute top-2 right-2">
-                        <XCircleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
-                        Closed
-                      </span>
-                    )}
-                    {bounty.submissions.filter((submission) => submission.status === "SUBMITTED").length !== 0 && (
-                      <span className="text-xl font-cal text-yellow-400 bg-orange-50 absolute top-2 right-2">
-                        <ExclamationTriangleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
-                        Submitted
-                      </span>
-                    )}
-                    {bounty.submissions.filter((submission) => submission.status === "SUBMITTED").length === 0 && bounty.submissions.filter((submission) => submission.status === "APPROVED").length === 0 && (
-                      <span className="text-2xl font-cal text-orange-300 absolute top-2 right-2">
-                        ${bounty.value}
-                      </span>
-                    )}
-                    <p className="text-sm text-gray-700 overflow-x-hidden">
-                      {bounty.description && bounty.description.length > 50
-                        ? bounty.description.substring(0, 50) + "..."
-                        : bounty.description}
-                    </p>
-                  </Link>
-                ))}
+                {project.bounties
+                  .filter((bounty) => bounty.type === "CHALLENGE")
+                  .map((bounty) => (
+                    <Link
+                      to={`/bounty/${bounty.id}`}
+                      key={bounty.id}
+                      className="border border-dashed border-orange-900 hover:border-orange-500 group rounded px-4 py-2 relative"
+                    >
+                      <h3 className="text-2xl font-cal text-orange-900 group-hover:text-orange-500 group-hover:underline pr-16">
+                        {bounty.title}
+                      </h3>
+                      {bounty.submissions.filter(
+                        (submission) => submission.status === "APPROVED"
+                      ).length !== 0 && (
+                        <span className="text-xl font-cal text-red-400 bg-orange-50 absolute top-2 right-2">
+                          <XCircleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
+                          Closed
+                        </span>
+                      )}
+                      {bounty.submissions.filter(
+                        (submission) => submission.status === "SUBMITTED"
+                      ).length !== 0 && (
+                        <span className="text-xl font-cal text-yellow-400 bg-orange-50 absolute top-2 right-2">
+                          <ExclamationTriangleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
+                          Submitted
+                        </span>
+                      )}
+                      {bounty.submissions.filter(
+                        (submission) => submission.status === "SUBMITTED"
+                      ).length === 0 &&
+                        bounty.submissions.filter(
+                          (submission) => submission.status === "APPROVED"
+                        ).length === 0 && (
+                          <span className="text-2xl font-cal text-orange-300 absolute top-2 right-2">
+                            ${bounty.value}
+                          </span>
+                        )}
+                      <p className="text-sm text-gray-700 overflow-x-hidden">
+                        {bounty.description && bounty.description.length > 50
+                          ? bounty.description.substring(0, 50) + "..."
+                          : bounty.description}
+                      </p>
+                    </Link>
+                  ))}
+              </div>
+              <h3 className="text-xl font-cal text-orange-900 sm:text-3xl my-4">
+                Bounties
+              </h3>
+              <div className="grid grid-cols-3 gap-4 mt-4">
+                {project.bounties
+                  .filter((bounty) => bounty.type === "BOUNTY")
+                  .map((bounty) => (
+                    <Link
+                      to={`/bounty/${bounty.id}`}
+                      key={bounty.id}
+                      className="border border-dashed border-orange-900 hover:border-orange-500 group rounded px-4 py-2 relative"
+                    >
+                      <h3 className="text-2xl font-cal text-orange-900 group-hover:text-orange-500 group-hover:underline pr-16">
+                        {bounty.title}
+                      </h3>
+                      {bounty.submissions.filter(
+                        (submission) => submission.status === "APPROVED"
+                      ).length !== 0 && (
+                        <span className="text-xl font-cal text-red-400 bg-orange-50 absolute top-2 right-2">
+                          <XCircleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
+                          Closed
+                        </span>
+                      )}
+                      {bounty.submissions.filter(
+                        (submission) => submission.status === "SUBMITTED"
+                      ).length !== 0 && (
+                        <span className="text-xl font-cal text-yellow-400 bg-orange-50 absolute top-2 right-2">
+                          <ExclamationTriangleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
+                          Submitted
+                        </span>
+                      )}
+                      {bounty.submissions.filter(
+                        (submission) => submission.status === "SUBMITTED"
+                      ).length === 0 &&
+                        bounty.submissions.filter(
+                          (submission) => submission.status === "APPROVED"
+                        ).length === 0 && (
+                          <span className="text-2xl font-cal text-orange-300 absolute top-2 right-2">
+                            ${bounty.value}
+                          </span>
+                        )}
+                      <p className="text-sm text-gray-700 overflow-x-hidden">
+                        {bounty.description && bounty.description.length > 50
+                          ? bounty.description.substring(0, 50) + "..."
+                          : bounty.description}
+                      </p>
+                    </Link>
+                  ))}
                 {project.bounties.length === 0 && (
                   <div className="border border-dashed border-orange-900 rounded p-4 col-span-3 text-orange-900 text-center">
                     <strong className="font-semibold">{project.name}</strong>{" "}
