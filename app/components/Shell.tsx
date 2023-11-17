@@ -6,6 +6,7 @@ import { Link, useMatches } from "@remix-run/react";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard" },
+  { name: "Mission Control", href: "/control" },
   { name: "Profile", href: "/profile" },
 ];
 
