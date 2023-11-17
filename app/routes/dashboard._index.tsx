@@ -98,7 +98,7 @@ export default function Index() {
                     className="text-orange-500 hover:text-orange-700 text-xl font-cal"
                   >
                     <PencilSquareIcon className="w-4 h-4 mb-0.5 inline-block" />{" "}
-                    Create a new bounty
+                    Create a new bounty or challenge
                   </Link>
                   <Link
                     to="/review"
