@@ -1,8 +1,30 @@
-node_modules
+.env
 
+# compiled output
 /.cache
 /build
 /public/build
-.env
+/dist
+/tmp
+/out-tsc
 
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/
+
+# misc
+npm-debug.log
+
+# System Files
 .DS_Store
+.vscode/settings.json
+.vscode/launch.json
