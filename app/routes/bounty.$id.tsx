@@ -70,6 +70,8 @@ export default function Bounty() {
                           <a
                             href={submission.url}
                             className="text-red-900 hover:text-red-500 underline"
+                            target="_blank"
+                            rel="noreferrer"
                           >
                             {submission.url}
                           </a>
