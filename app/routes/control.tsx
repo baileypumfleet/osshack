@@ -6,6 +6,7 @@ import prisma from "~/lib/prisma";
 import { useLoaderData } from "@remix-run/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime.js";
+import Footer from "~/components/Footer";
 dayjs.extend(relativeTime);
 
 export const meta: MetaFunction = () => {
@@ -111,6 +112,7 @@ export default function Index() {
               </h3>
             </div> */}
           </div>
+          <Footer />
         </Shell>
       </SignedIn>
       <SignedOut>
