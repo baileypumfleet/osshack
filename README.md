@@ -12,6 +12,7 @@ You'll need a few things first:
 - Bun
 - PostgreSQL
 - [Clerk](https://clerk.com) credentials
+- Tremendous credentials (for prize payouts)
 - Sanity
 
 First, make a copy of the `.env.example` file and as `.env` and fill out the environment variables.
@@ -20,6 +21,8 @@ Then, just install the dependencies and run the development server is as easy as
 
 ```sh
 bun install
+bunx prisma db push
+bunx prisma generate (if necessary)
 npm run dev
 ```
 
