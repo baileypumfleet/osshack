@@ -18,8 +18,8 @@ export default function GradientHero() {
             width:100%;
             height:100%;
             --gradient-color-1: #D9622B; 
-            --gradient-color-2: #F9DCA6; 
-            --gradient-color-3: #311111;  
+            --gradient-color-2: #ff6500; 
+            --gradient-color-3: #d26c2b;  
             --gradient-color-4: #EE793C;
             }
          `}
