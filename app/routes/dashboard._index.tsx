@@ -16,6 +16,9 @@ import {
   MagnifyingGlassIcon,
   XCircleIcon,
 } from "@heroicons/react/20/solid";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import removeComments from "remark-remove-comments";
 dayjs.extend(relativeTime);
 
 export const meta: MetaFunction = () => {
@@ -210,9 +213,11 @@ export default function Index() {
                           </span>
                         )}
                       <p className="text-sm text-gray-700 overflow-x-hidden">
-                        {bounty.description && bounty.description.length > 50
-                          ? bounty.description.substring(0, 50) + "..."
-                          : bounty.description}
+                        <Markdown remarkPlugins={[remarkGfm, removeComments]}>
+                            {bounty.description && bounty.description.length > 50
+                              ? bounty.description.substring(0, 50) + "..."
+                              : bounty.description}
+                        </Markdown>
                       </p>
                     </Link>
                   ))}
