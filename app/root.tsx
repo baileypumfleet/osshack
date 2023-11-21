@@ -1,3 +1,4 @@
+import { withSentry } from "@sentry/remix";
 import stylesheet from "~/tailwind.css";
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
 import type { LinksFunction, MetaFunction, LoaderFunction } from "@remix-run/node";
@@ -20,7 +21,7 @@ export const meta: MetaFunction = () => ([
   { name: "viewport", content: "width=device-width,initial-scale=1" },
   { property: "og:title", content: "OSShack" },
 ]);
- 
+
 export const loader: LoaderFunction = (args) => rootAuthLoader(args);
 
 export const ErrorBoundary = ClerkErrorBoundary();
@@ -44,4 +45,4 @@ function App() {
   );
 }
 
-export default ClerkApp(App);
+export default withSentry(ClerkApp(App));

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prisma:generate": "prisma generate",
-    "build": "npm run prisma:generate && remix build",
+    "build": "npm run prisma:generate && remix build --sourcemap && sentry-upload-sourcemaps --org calcom --project osshack",
     "dev": "remix dev --manual",
     "start": "remix-serve ./build/index.js",
     "typecheck": "tsc"
@@ -19,6 +19,7 @@
     "@remix-run/node": "^2.2.0",
     "@remix-run/react": "^2.2.0",
     "@remix-run/serve": "^2.2.0",
+    "@sentry/remix": "^7.81.0",
     "dayjs": "^1.11.10",
     "isbot": "^3.6.8",
     "octokit": "^3.1.1",
