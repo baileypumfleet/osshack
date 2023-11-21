@@ -84,7 +84,7 @@ export default function Index() {
                     </div>
                     <div className="text-right w-36">
                       <p className="text-lg font-cal text-orange-900 sm:text-xl">
-                        {formatter.format(bounty.value)}
+                        {formatter.format(bounty.value || 0)}
                       </p>
                       <p className="text-gray-500 text-xs">
                         {bounty.type.toLowerCase()}

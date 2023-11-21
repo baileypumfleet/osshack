@@ -15,6 +15,10 @@ import { createClerkClient } from "@clerk/remix/api.server";
 import { Octokit } from "octokit";
 import { useEffect, useState } from "react";
 
+enum BountyType {
+    BOUNTY = "BOUNTY",
+    CHALLENGE = "CHALLENGE",
+}
 export const meta: MetaFunction = () => {
   return [
     { title: "Create a new bounty | OSShack" },
@@ -39,11 +43,11 @@ export const action = async (args: ActionFunctionArgs) => {
 
   const formData = await args.request.formData();
 
-  const title = formData.get("title");
-  const description = formData.get("description");
-  const value = formData.get("reward");
-  const github = formData.get("github");
-  const type = formData.get("type");
+  const title = formData.get("title") as string || "Unknown";
+  const description = formData.get("description") as string || "Unknown";
+  const value = formData.get("reward") as string || "0";
+  const github = formData.get("github") as string || "https://example.com";
+  const type = formData.get("type") as BountyType || "BOUNTY";
 
   // Update the user with the Prisma client
   await prisma.bounty.create({
@@ -249,10 +253,6 @@ export default function New() {
                 Create and publish
               </button>
             </div>
-
-            {actionData?.error ? (
-              <p className="text-red-500">{actionData.error}</p>
-            ) : null}
           </Form>
           <Footer />
         </Shell>
