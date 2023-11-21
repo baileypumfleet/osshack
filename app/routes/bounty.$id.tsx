@@ -89,52 +89,54 @@ export default function Bounty() {
               <div className="prose prose-headings:font-cal prose-headings:text-orange-900 prose-headings:mb-2 prose-headings:font-normal">
                 <Markdown remarkPlugins={[remarkGfm, removeComments, [remarkGithub, {repository: data.bounty?.project.repo}]]}>{data.bounty?.description}</Markdown>
               </div>
-              <h2 className="text-3xl font-cal text-orange-900 mb-2 mt-8">
-                Submit
-              </h2>
-              {data.bounty?.submissions &&
-              data.bounty?.submissions.filter(
-                (submission) => submission.status === "APPROVED"
-              ).length === 0 ? (
-                <>
-                  <p className="text-gray-700">
-                    If you&apos;re ready to submit your attempt at this {data.bounty?.type && data.bounty?.type.toLowerCase()},
-                    please make sure the following is completed:
-                    <ul className="list-disc ml-8 mt-2 text-gray-500 space-y-1">
-                      <li>
-                        You have your{" "}
-                        <span className="font-semibold text-gray-700">
+              <div className="bg-white border border-gray-300 border-b-4 border-b-gray-200 rounded-lg p-5 mt-8">
+                <h2 className="text-3xl font-cal text-orange-900 mb-2">
+                  Submit
+                </h2>
+                {data.bounty?.submissions &&
+                data.bounty?.submissions.filter(
+                    (submission) => submission.status === "APPROVED"
+                ).length === 0 ? (
+                    <>
+                      <p className="text-gray-700">
+                        If you&apos;re ready to submit your attempt at this {data.bounty?.type && data.bounty?.type.toLowerCase()},
+                        please make sure the following is completed:
+                        <ul className="list-disc ml-8 mt-2 text-gray-500 space-y-1">
+                          <li>
+                            You have your{" "}
+                            <span className="font-semibold text-gray-700">
                           GitHub username
                         </span>{" "}
-                        set correctly in your profile
-                      </li>
-                      <li>
-                        You have submitted an{" "}
-                        <span className="font-semibold text-gray-700">
+                            set correctly in your profile
+                          </li>
+                          <li>
+                            You have submitted an{" "}
+                            <span className="font-semibold text-gray-700">
                           open pull request
                         </span>{" "}
-                        in the {data.bounty?.project.repo} repository
-                      </li>
-                    </ul>
-                  </p>
-                  <Link
-                    to={`/submit/${params.id}`}
-                    onClick={() => isLoading(true)}
-                    className="mt-4 text-white bg-orange-600 px-4 py-2 rounded-md flex font-medium w-48"
-                  >
-                    {loading === true ? (
-                      <CogIcon className="h-5 w-5 mr-1.5 mt-0.5 animate-spin" />
-                    ) : (
-                      <PaperAirplaneIcon className="h-5 w-5 mr-1.5 mt-0.5" />
-                    )}
-                    Submit a solution
-                  </Link>
-                </>
-              ) : (
-                <p className="text-gray-700">
-                  This bounty is now closed. Thank you for your contributions!
-                </p>
-              )}
+                            in the {data.bounty?.project.repo} repository
+                          </li>
+                        </ul>
+                      </p>
+                      <Link
+                          to={`/submit/${params.id}`}
+                          onClick={() => isLoading(true)}
+                          className="mt-4 text-white bg-orange-600 px-4 py-2 rounded-md flex font-medium w-48"
+                      >
+                        {loading === true ? (
+                            <CogIcon className="h-5 w-5 mr-1.5 mt-0.5 animate-spin" />
+                        ) : (
+                            <PaperAirplaneIcon className="h-5 w-5 mr-1.5 mt-0.5" />
+                        )}
+                        Submit a solution
+                      </Link>
+                    </>
+                ) : (
+                    <p className="text-gray-700">
+                      This bounty is now closed. Thank you for your contributions!
+                    </p>
+                )}
+              </div>
             </div>
             <div>
               <h2 className="text-3xl font-cal text-orange-900 mb-2">Reward</h2>

@@ -141,49 +141,53 @@ export default function Index() {
               )}
               <div className="grid grid-cols-3 gap-4 mt-4">
                 {project.bounties
-                  .filter((bounty) => bounty.type === "CHALLENGE")
-                  .map((bounty) => (
-                    <Link
-                      to={`/bounty/${bounty.id}`}
-                      key={bounty.id}
-                      className="border border-dashed border-orange-900 hover:border-orange-500 group rounded px-4 py-2 relative"
-                    >
-                      <h3 className="text-2xl font-cal text-orange-900 group-hover:text-orange-500 group-hover:underline pr-16">
-                        {bounty.title}
-                      </h3>
-                      {bounty.submissions.filter(
-                        (submission) => submission.status === "APPROVED"
-                      ).length !== 0 && (
-                        <span className="text-xl font-cal text-red-400 bg-orange-50 absolute top-2 right-2">
-                          <XCircleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
+                    .filter((bounty) => bounty.type === "CHALLENGE")
+                    .map((bounty) => (
+                        <Link
+                            to={`/bounty/${bounty.id}`}
+                            key={bounty.id}
+                            className="bg-white hover:bg-gray-50 border border-gray-300 border-b-4 border-b-gray-200 rounded-lg p-5 relative"
+                        >
+                          <div className="flex">
+                            <h3 className="text-lg font-medium text-gray-900">
+                              {bounty.title}
+                            </h3>
+                            {bounty.submissions.filter(
+                                (submission) => submission.status === "APPROVED"
+                            ).length !== 0 && (
+                                <span className="text-md tracking-tight text-red-500 font-mono font-semibold ml-auto flex">
+                          <XCircleIcon className="w-5 h-5 mt-0.5 mr-1 inline-block" />
                           Closed
                         </span>
-                      )}
-                      {bounty.submissions.filter(
-                        (submission) => submission.status === "SUBMITTED"
-                      ).length !== 0 && (
-                        <span className="text-xl font-cal text-yellow-400 bg-orange-50 absolute top-2 right-2">
-                          <ExclamationTriangleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
+                            )}
+                            {bounty.submissions.filter(
+                                (submission) => submission.status === "SUBMITTED"
+                            ).length !== 0 && (
+                                <span className="text-md tracking-tight text-yellow-500 font-mono font-semibold ml-auto flex">
+                          <ExclamationTriangleIcon className="w-5 h-5 mt-0.5 mr-1 inline-block" />
                           Submitted
                         </span>
-                      )}
-                      {bounty.submissions.filter(
-                        (submission) => submission.status === "SUBMITTED"
-                      ).length === 0 &&
-                        bounty.submissions.filter(
-                          (submission) => submission.status === "APPROVED"
-                        ).length === 0 && (
-                          <span className="text-2xl font-cal text-orange-300 absolute top-2 right-2">
+                            )}
+                            {bounty.submissions.filter(
+                                    (submission) => submission.status === "SUBMITTED"
+                                ).length === 0 &&
+                                bounty.submissions.filter(
+                                    (submission) => submission.status === "APPROVED"
+                                ).length === 0 && (
+                                    <span className="text-md tracking-tight text-orange-500 font-mono font-semibold ml-auto">
                             ${bounty.value}
                           </span>
-                        )}
-                      <p className="text-sm text-gray-700 overflow-x-hidden">
-                        {bounty.description && bounty.description.length > 50
-                          ? bounty.description.substring(0, 50) + "..."
-                          : bounty.description}
-                      </p>
-                    </Link>
-                  ))}
+                                )}
+                          </div>
+                          <p className="text-sm text-gray-600 overflow-x-hidden">
+                            <Markdown remarkPlugins={[remarkGfm, removeComments]}>
+                              {bounty.description && bounty.description.length > 50
+                                  ? bounty.description.substring(0, 50) + "..."
+                                  : bounty.description}
+                            </Markdown>
+                          </p>
+                        </Link>
+                    ))}
               </div>
               <h3 className="text-xl font-cal text-orange-900 sm:text-3xl my-4">
                 Bounties
@@ -195,24 +199,25 @@ export default function Index() {
                     <Link
                       to={`/bounty/${bounty.id}`}
                       key={bounty.id}
-                      className="border border-dashed border-orange-900 hover:border-orange-500 group rounded px-4 py-2 relative"
+                      className="bg-white hover:bg-gray-50 border border-gray-300 border-b-4 border-b-gray-200 rounded-lg p-5 relative"
                     >
-                      <h3 className="text-2xl font-cal text-orange-900 group-hover:text-orange-500 group-hover:underline pr-16">
+                      <div className="flex">
+                      <h3 className="text-lg font-medium text-gray-900">
                         {bounty.title}
                       </h3>
                       {bounty.submissions.filter(
                         (submission) => submission.status === "APPROVED"
                       ).length !== 0 && (
-                        <span className="text-xl font-cal text-red-400 bg-orange-50 absolute top-2 right-2">
-                          <XCircleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
+                        <span className="text-md tracking-tight text-red-500 font-mono font-semibold ml-auto flex">
+                          <XCircleIcon className="w-5 h-5 mt-0.5 mr-1 inline-block" />
                           Closed
                         </span>
                       )}
                       {bounty.submissions.filter(
                         (submission) => submission.status === "SUBMITTED"
                       ).length !== 0 && (
-                        <span className="text-xl font-cal text-yellow-400 bg-orange-50 absolute top-2 right-2">
-                          <ExclamationTriangleIcon className="w-5 h-5 mb-0.5 inline-block" />{" "}
+                        <span className="text-md tracking-tight text-yellow-500 font-mono font-semibold ml-auto flex">
+                          <ExclamationTriangleIcon className="w-5 h-5 mt-0.5 mr-1 inline-block" />
                           Submitted
                         </span>
                       )}
@@ -222,11 +227,12 @@ export default function Index() {
                         bounty.submissions.filter(
                           (submission) => submission.status === "APPROVED"
                         ).length === 0 && (
-                          <span className="text-2xl font-cal text-orange-300 absolute top-2 right-2">
+                          <span className="text-md tracking-tight text-orange-500 font-mono font-semibold ml-auto">
                             ${bounty.value}
                           </span>
                         )}
-                      <p className="text-sm text-gray-700 overflow-x-hidden">
+                      </div>
+                      <p className="text-sm text-gray-600 overflow-x-hidden">
                         <Markdown remarkPlugins={[remarkGfm, removeComments]}>
                             {bounty.description && bounty.description.length > 50
                               ? bounty.description.substring(0, 50) + "..."
@@ -236,9 +242,12 @@ export default function Index() {
                     </Link>
                   ))}
                 {project.bounties.length === 0 && (
-                  <div className="border border-dashed border-orange-900 rounded p-4 col-span-3 text-orange-900 text-center">
-                    <strong className="font-semibold">{project.name}</strong>{" "}
-                    has ran out of bounties. Check back soon!
+                  <div className="bg-white border border-gray-300 border-b-4 border-b-gray-200 rounded-lg px-5 py-24 col-span-3 text-center">
+                    <img src="/bounties.svg" alt="Bounties" className="h-32 mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-gray-900">
+                      No bounties left!
+                    </h3>
+                    <p className="text-gray-500 text-sm">{project.name} has ran out of bounties. Check back soon!</p>
                   </div>
                 )}
               </div>
