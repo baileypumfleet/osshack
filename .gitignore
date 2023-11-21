@@ -28,5 +28,3 @@ npm-debug.log
 .DS_Store
 .vscode/settings.json
 .vscode/launch.json
-# Sentry Config File
-.sentryclirc
