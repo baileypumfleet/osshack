@@ -32,7 +32,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   const data = useLoaderData<typeof loader>();
 
-  if (!data.user?.projectId) {
+  if (!data.user?.projectId && data.live === "false") {
     return (
       <div>
         <SignedIn>
@@ -260,5 +260,5 @@ export const loader = async (args) => {
     },
   });
 
-  return json({ user, projects, allocated: totalValue._sum.value });
+  return json({ user, projects, allocated: totalValue._sum.value, live: process.env.LIVE });
 };
