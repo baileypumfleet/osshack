@@ -5,6 +5,9 @@ import { Form, Link, useLoaderData, useParams } from "@remix-run/react";
 import Shell from "~/components/Shell";
 import prisma from "~/lib/prisma";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkGithub from "remark-github";
+import removeComments from "remark-remove-comments";
 import Footer from "~/components/Footer";
 import {
   CogIcon,
@@ -84,7 +87,7 @@ export default function Bounty() {
                 Description
               </h2>
               <div className="prose prose-headings:font-cal prose-headings:text-orange-900 prose-headings:mb-2 prose-headings:font-normal">
-                <Markdown>{data.bounty?.description}</Markdown>
+                <Markdown remarkPlugins={[remarkGfm, removeComments, [remarkGithub, {repository: data.bounty?.project.repo}]]}>{data.bounty?.description}</Markdown>
               </div>
               <h2 className="text-3xl font-cal text-orange-900 mb-2 mt-8">
                 Submit
