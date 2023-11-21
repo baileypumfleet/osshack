@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/remix";
-import type { MetaFunction } from "@remix-run/node";
+import type {LoaderFunctionArgs, MetaFunction} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import Shell from "~/components/Shell";
 import prisma from "~/lib/prisma";
@@ -19,6 +19,7 @@ import {
 } from "@heroicons/react/20/solid";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+// @ts-ignore
 import removeComments from "remark-remove-comments";
 dayjs.extend(relativeTime);
 
@@ -263,7 +264,7 @@ export default function Index() {
   );
 }
 
-export const loader = async (args) => {
+export const loader = async (args: LoaderFunctionArgs) => {
   const { userId } = await getAuth(args);
   const clerkUser = await createClerkClient({
     secretKey: process.env.CLERK_SECRET_KEY,

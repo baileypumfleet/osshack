@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/remix";
-import { redirect } from "@remix-run/node";
+import {ActionFunctionArgs, LoaderFunctionArgs, redirect} from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import Shell from "~/components/Shell";
@@ -20,7 +20,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const action = async (args) => {
+export const action = async (args: ActionFunctionArgs) => {
   const { userId } = await getAuth(args);
   const clerkUser = await createClerkClient({
     secretKey: process.env.CLERK_SECRET_KEY,
@@ -132,7 +132,7 @@ export default function Bounty() {
   );
 }
 
-export const loader = async (args) => {
+export const loader = async (args: LoaderFunctionArgs) => {
   const { userId } = await getAuth(args);
   const clerkUser = await createClerkClient({
     secretKey: process.env.CLERK_SECRET_KEY,

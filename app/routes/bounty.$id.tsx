@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/remix";
-import { redirect } from "@remix-run/node";
+import {ActionFunctionArgs, LoaderFunctionArgs, redirect} from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import { Form, Link, useLoaderData, useParams } from "@remix-run/react";
 import Shell from "~/components/Shell";
@@ -7,6 +7,7 @@ import prisma from "~/lib/prisma";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkGithub from "remark-github";
+// @ts-ignore
 import removeComments from "remark-remove-comments";
 import Footer from "~/components/Footer";
 import {
@@ -30,13 +31,13 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const action = async (args) => {
+export const action = async (args: ActionFunctionArgs) => {
   const formData = await args.request.formData();
 
   const id = formData.get("bounty");
 
   await prisma.bounty.delete({
-    where: { id: parseInt(id) },
+    where: { id: parseInt(id as string) },
   });
 
   return redirect("/dashboard");
@@ -177,7 +178,7 @@ export default function Bounty() {
   );
 }
 
-export const loader = async (args) => {
+export const loader = async (args: LoaderFunctionArgs) => {
   const { userId } = await getAuth(args);
   const clerkUser = await createClerkClient({
     secretKey: process.env.CLERK_SECRET_KEY,
@@ -189,7 +190,7 @@ export const loader = async (args) => {
   });
 
   const bounty = await prisma.bounty.findUnique({
-    where: { id: parseInt(args.params.id) },
+    where: { id: parseInt(args.params.id as string) },
     include: { project: true, submissions: true },
   });
   return { user, bounty };

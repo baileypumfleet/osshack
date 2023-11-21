@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/remix";
-import type { MetaFunction } from "@remix-run/node";
+import type {LoaderFunctionArgs, MetaFunction} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import Shell from "~/components/Shell";
 import prisma from "~/lib/prisma";
@@ -122,7 +122,7 @@ export default function Index() {
   );
 }
 
-export const loader = async (args) => {
+export const loader = async (args: LoaderFunctionArgs) => {
   const bounties = await prisma.bounty.findMany({
     orderBy: {
       value: "desc",

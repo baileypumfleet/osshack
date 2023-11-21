@@ -1,5 +1,5 @@
 import {RedirectToSignIn, SignedIn, SignedOut} from "@clerk/remix";
-import type {MetaFunction} from "@remix-run/node";
+import type {ActionFunctionArgs, LoaderFunctionArgs, MetaFunction} from "@remix-run/node";
 import {json, redirect} from "@remix-run/node";
 import Shell from "~/components/Shell";
 import prisma from "~/lib/prisma";
@@ -20,7 +20,7 @@ export const meta: MetaFunction = () => {
     ];
 };
 
-export const action = async (args) => {
+export const action = async (args: ActionFunctionArgs) => {
     const formData = await args.request.formData();
     const submission = formData.get("submission");
     const action = formData.get("action");
@@ -179,7 +179,7 @@ export default function Review() {
     );
 }
 
-export const loader = async (args) => {
+export const loader = async (args: LoaderFunctionArgs) => {
     const {userId} = await getAuth(args);
     const clerkUser = await createClerkClient({
         secretKey: process.env.CLERK_SECRET_KEY,
