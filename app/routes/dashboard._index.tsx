@@ -12,6 +12,7 @@ import Footer from "../components/Footer";
 import { getAuth } from "@clerk/remix/ssr.server";
 import { createClerkClient } from "@clerk/remix/api.server";
 import {
+  ArrowTopRightOnSquareIcon,
   ExclamationTriangleIcon,
   MagnifyingGlassIcon,
   XCircleIcon,
@@ -91,9 +92,22 @@ export default function Index() {
         <Shell title="Dashboard">
           {data.projects.map((project) => (
             <div key={project.id} className="mb-16">
-              <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-4">
-                {project.name}
-              </h2>
+              <div className="flex">
+                <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-4">
+                  {project.name}
+                </h2>
+                {project.guide && (
+                <a
+                    href={project.guide}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-orange-500 hover:text-orange-700 text-xl font-cal ml-auto mt-2"
+                >
+                  <ArrowTopRightOnSquareIcon className="w-4 h-4 mb-0.5 inline-block" />{" "}
+                  Read the guide
+                </a>
+                    )}
+              </div>
               {data.user?.projectId === project.id && (
                 <div className="flex">
                   <Link
