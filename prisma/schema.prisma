@@ -34,6 +34,7 @@ model Project {
   repo      String?
   budget    Int?
   guide     String?
+  support   String?
   createdAt DateTime @default(now())
   bounties  Bounty[]
   members   User[]
