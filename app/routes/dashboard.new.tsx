@@ -89,9 +89,11 @@ export default function New() {
                     <div className="bg-gray-50 rounded-lg border text-gray-900 text-sm shadow-sm px-4 py-3 mb-4 flex">
                         <div className="border-r pr-4 text-gray-500">
                             Showing issues from{" "}
-                            <span className="font-medium text-gray-900">
-                {data.issues[0].url.split("/")[4]}/{data.issues[0].url.split("/")[5]}
-              </span>
+                            {data.issues[0] && (
+                                <span className="font-medium text-gray-900">
+                                    {data.issues[0].url.split("/")[4]}/{data.issues[0].url.split("/")[5]}
+                                </span>
+                            )}
                         </div>
                         <div className="ml-auto px-4 text-gray-900 font-medium">
                             <button
@@ -156,7 +158,7 @@ export default function New() {
                                 </div>
                             </div>
                         )}
-                        {data.issues?.map((issue) => (
+                        {data.issues.length > 0 ? (data.issues?.map((issue) => (
                             <div key={issue.id} className="px-4 py-2 border-b flex">
                                 <div className="font-medium pt-1.5">{issue.title}</div>
                                 <div className="ml-auto">
@@ -182,7 +184,12 @@ export default function New() {
                                     </Form>
                                 </div>
                             </div>
-                        ))}
+                        ))) : (
+                            <div className="p-4 border-b text-gray-500">
+                                    <span className="text-orange-700 font-medium text-lg mb-2">No issues found.</span><br />
+                                    You&apos;ve probably added all of the issues from this page as bounties. If so, go to the next page.
+                            </div>
+                        )}
                         <div className="px-4 pt-4 pb-3 flex text-gray-400">
               <span className="font-medium text-gray-500">
                 Can&apos;t find what you&apos;re looking for?
@@ -294,7 +301,7 @@ export const loader = async (args) => {
 
     const bounties = await prisma.bounty.findMany({
         where: {projectId: user?.projectId || 0},
-        select: { github: true },
+        select: {github: true},
     });
 
     // Extract GitHub issue URLs from bounties
