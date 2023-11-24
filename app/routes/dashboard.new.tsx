@@ -14,6 +14,7 @@ import { getAuth } from "@clerk/remix/ssr.server";
 import { createClerkClient } from "@clerk/remix/api.server";
 import { Octokit } from "octokit";
 import { useEffect, useState } from "react";
+import {toast, Toaster} from "react-hot-toast";
 
 export const meta: MetaFunction = () => {
   return [
@@ -45,8 +46,8 @@ export const action = async (args) => {
   const github = formData.get("github");
   const type = formData.get("type");
 
-  // Update the user with the Prisma client
-  await prisma.bounty.create({
+  // Create the bounty
+  const bounty = await prisma.bounty.create({
     data: {
       title,
       description,
@@ -57,7 +58,7 @@ export const action = async (args) => {
     },
   });
 
-  return redirect("/dashboard");
+  return bounty;
 };
 
 export default function New() {
@@ -65,12 +66,18 @@ export default function New() {
   const data = useLoaderData<typeof loader>();
   const [searchParams, setSearchParams] = useSearchParams();
   const [loading, isLoading] = useState(false);
+  const [toasted, setToasted] = useState(false);
 
   useEffect(() => {
     if (data.issues) {
       isLoading(false);
     }
-  }, [data.issues]);
+
+    if (actionData && !toasted) {
+      toast.success("Bounty created successfully!");
+      setToasted(true);
+    }
+  }, [data.issues, actionData]);
 
   return (
     <div>
@@ -168,7 +175,7 @@ export default function New() {
                       placeholder="$20"
                       className="rounded-md w-16 px-2 py-1 outline-none text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                     />
-                    <button className="rounded-md bg-orange-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline">
+                    <button onClick={() => setToasted(false)} className="rounded-md bg-orange-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline">
                       Create bounty
                     </button>
                   </Form>
@@ -255,6 +262,7 @@ export default function New() {
             ) : null}
           </Form>
           <Footer />
+          <Toaster/>
         </Shell>
       </SignedIn>
       <SignedOut>
