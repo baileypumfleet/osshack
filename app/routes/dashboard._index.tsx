@@ -151,14 +151,14 @@ export default function Index() {
                                     </div>
                                 </div>
                             )}
-                            {project.bounties.filter((bounty) => bounty.type === "CHALLENGE")
+                            {data.user?.type === "IN_PERSON" && project.bounties.filter((bounty) => bounty.type === "CHALLENGE")
                                 .length > 0 && (
                                 <h3 className="text-xl font-medium text-gray-900 my-4">
                                     Challenges
                                 </h3>
                             )}
                             <div className="grid grid-cols-3 gap-4 mt-4">
-                                {project.bounties
+                                {data.user?.type === "IN_PERSON" && project.bounties
                                     .filter((bounty) => bounty.type === "CHALLENGE")
                                     .map((bounty) => (
                                         <Link
