@@ -90,7 +90,7 @@ export default function Bounty() {
         <>
             <SignedIn>
                 <Shell title={data.bounty?.title}>
-                    <div className="grid grid-cols-3 gap-x-8">
+                    <div className="grid grid-cols-3 gap-x-8 border rounded-lg bg-gray-50 px-10 py-8">
                         <div className="col-span-2">
                             {data.bounty?.submissions &&
                                 data.bounty?.submissions.filter(
