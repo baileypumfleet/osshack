@@ -83,10 +83,11 @@ export default function New() {
         <div>
             <SignedIn>
                 <Shell title="Bounties">
-                    <h2 className="text-3xl font-cal text-gray-900 sm:text-5xl my-8">
+                    <h2 className="text-3xl font-cal text-gray-900 sm:text-5xl my-8 mx-10">
                         Automatically create from GitHub
                     </h2>
-                    <div className="bg-gray-50 rounded-lg border text-gray-900 text-sm shadow-sm px-4 py-3 mb-4 flex">
+                    <div
+                        className="bg-gray-50 rounded-lg border text-gray-900 text-sm shadow-sm px-4 py-3 mb-4 mx-10 flex">
                         <div className="border-r pr-4 text-gray-500">
                             Showing issues from{" "}
                             {data.issues[0] && (
@@ -114,8 +115,8 @@ export default function New() {
                         <div className="border-l px-4 text-gray-500">
                             Page{" "}
                             <span className="font-medium text-gray-900">
-                {searchParams.get("page") || "1"}
-              </span>
+                              {searchParams.get("page") || "1"}
+                            </span>
                         </div>
                         <div className="border-l pl-4 text-gray-900 font-medium">
                             <button
@@ -134,7 +135,7 @@ export default function New() {
                             </button>
                         </div>
                     </div>
-                    <div className="bg-gray-50 rounded-lg border text-gray-900 text-sm shadow-sm py-1">
+                    <div className="bg-gray-50 rounded-lg border text-gray-900 text-sm shadow-sm py-1 mx-10">
                         {loading && (
                             <div className="w-full h-screen bg-white z-50 text-center pt-24">
                                 <div role="status">
@@ -186,8 +187,9 @@ export default function New() {
                             </div>
                         ))) : (
                             <div className="p-4 border-b text-gray-500">
-                                    <span className="text-orange-700 font-medium text-lg mb-2">No issues found.</span><br />
-                                    You&apos;ve probably added all of the issues from this page as bounties. If so, go to the next page.
+                                <span className="text-orange-700 font-medium text-lg mb-2">No issues found.</span><br/>
+                                You&apos;ve probably added all of the issues from this page as bounties. If so, go to
+                                the next page.
                             </div>
                         )}
                         <div className="px-4 pt-4 pb-3 flex text-gray-400">
@@ -197,10 +199,10 @@ export default function New() {
                             &nbsp;Reach out to support, or create the issue manually.
                         </div>
                     </div>
-                    <h2 className="text-3xl font-cal text-gray-900 sm:text-5xl mb-8 mt-16">
-                        Manually create a bounty or submission
+                    <h2 className="text-3xl font-cal text-gray-900 sm:text-5xl mb-8 mt-16 mx-10">
+                        Manually create a bounty or challenge
                     </h2>
-                    <Form method="post" className="space-y-4">
+                    <Form method="post" className="space-y-4 mx-10">
                         <div className="flex flex-col">
                             <label className="block text-sm font-medium leading-6 text-gray-900">
                                 Title
@@ -229,7 +231,7 @@ export default function New() {
                             <input
                                 type="text"
                                 name="github"
-                                placeholder="https://github.com/calcom/cal.com/pull/12374"
+                                placeholder="https://github.com/calcom/cal.com/issues/12374"
                                 className="block w-full rounded-md border px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
                             />
                         </div>
