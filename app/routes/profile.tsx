@@ -65,15 +65,15 @@ export default function Index() {
         <Shell title="Profile">
           <>
             {!user.confirmed ? (
-              <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-8">
+              <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-8 mx-10">
                 Submit your application
               </h2>
             ) : (
-              <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-8">
+              <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-8 mx-10">
                 You&apos;re all set!
               </h2>
             )}
-            <div className="grid md:grid-cols-3 gap-x-8">
+            <div className="grid md:grid-cols-3 gap-x-8 mx-10">
               <div className="p-5 text-center">
                 <div className="bg-green-600 rounded-full w-24 h-24 flex items-center mx-auto">
                   <CheckIcon className="mx-auto w-12 h-12 text-white" />
@@ -141,10 +141,10 @@ export default function Index() {
               </div>
             </div>
           </>
-          <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl my-8">
+          <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl my-8 mx-10">
             Update your details
           </h2>
-          <Form method="post" className="space-y-4">
+          <Form method="post" className="space-y-4 mx-10">
             <div className="flex flex-col">
               <label className="block text-sm font-medium leading-6 text-gray-900">
                 Full name
@@ -153,7 +153,7 @@ export default function Index() {
                 type="text"
                 name="name"
                 defaultValue={user.name || ""}
-                className="block w-full rounded-md border-0 px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
               />
             </div>
             <div className="flex flex-col">
@@ -164,7 +164,7 @@ export default function Index() {
                 type="email"
                 name="email"
                 defaultValue={user.email}
-                className="cursor-not-allowed block w-full rounded-md border-0 px-4 py-1.5 outline-none text-gray-400 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                className="cursor-not-allowed block w-full rounded-md border px-4 py-1.5 outline-none text-gray-400 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 disabled={true}
               />
             </div>
@@ -176,7 +176,7 @@ export default function Index() {
                 type="text"
                 name="github"
                 defaultValue={user.github || ""}
-                className="block w-full rounded-md border-0 px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
               />
             </div>
             <div className="flex flex-col">
@@ -186,7 +186,7 @@ export default function Index() {
               <select
                 name="type"
                 defaultValue={user.type || "REMOTE"}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm outline-none sm:max-w-xs sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border py-1.5 text-gray-900 shadow-sm outline-none sm:max-w-xs sm:text-sm sm:leading-6"
               >
                 <option value="IN_PERSON">In Person</option>
                 <option value="REMOTE">Remote</option>
