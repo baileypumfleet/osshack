@@ -187,7 +187,7 @@ export default function Bounty() {
                 <span className="font-semibold text-gray-900">
                   ${data.bounty?.value}
                 </span>{" "}
-                                paid via gift card, bank transfer or PayPal withdrawal.
+                                paid after approval of your submission, redeemable via Tremendous.
                             </p>
 
                             <h2 className="text-3xl font-cal text-orange-900 mb-2">GitHub</h2>
