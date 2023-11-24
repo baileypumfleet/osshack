@@ -127,8 +127,17 @@ export default function Index() {
                   Get approved
                 </h3>
                 <p className="text-gray-500 text-sm">
-                  Our team will shortly review and approve your application.
+                  Our team will shortly review and approve your application. Once approved, we highly recommend joining the Discord server.
                 </p>
+                {user.confirmed && (
+                    <a
+                        href="https://discord.gg/nj5qFH2cPE"
+                        className="text-orange-600 hover:text-orange-700 font-medium"
+                    >
+                      Join the event Discord{" "}
+                      <ArrowRightIcon className="w-4 h-4 inline-block" />
+                    </a>
+                )}
               </div>
             </div>
           </>

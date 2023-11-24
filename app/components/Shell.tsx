@@ -8,6 +8,7 @@ const navigation = [
   { name: "Dashboard", href: "/dashboard" },
   { name: "Mission Control", href: "/control" },
   { name: "Profile", href: "/profile" },
+  { name: "Discord", href: "https://discord.gg/nj5qFH2cPE"},
 ];
 
 function classNames(...classes) {
