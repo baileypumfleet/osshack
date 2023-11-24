@@ -132,16 +132,16 @@ export default function Shell({ children, title }) {
             )}
           </Disclosure>
           <header className="py-10">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl font-bold tracking-tight text-white">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+              <h1 className="text-4xl font-cal tracking-w text-white">
                 {title || "OSShack"}
               </h1>
             </div>
           </header>
         </div>
 
-        <main className="-mt-32 bg-orange-50 pt-12">
-          <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+        <main className="-mt-32 bg-white pt-12">
+          <div className="mx-auto max-w-7xl pb-12">
             {children}
           </div>
         </main>

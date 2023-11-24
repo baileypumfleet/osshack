@@ -76,17 +76,17 @@ export default function New() {
     <div>
       <SignedIn>
         <Shell title="Bounties">
-          <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl my-8">
+          <h2 className="text-3xl font-cal text-gray-900 sm:text-5xl my-8">
             Automatically create from GitHub
           </h2>
-          <div className="bg-white rounded-md text-gray-900 text-sm shadow-sm px-4 py-3 mb-4 flex">
+          <div className="bg-gray-50 rounded-lg border text-gray-900 text-sm shadow-sm px-4 py-3 mb-4 flex">
             <div className="border-r pr-4 text-gray-500">
               Showing issues from{" "}
               <span className="font-medium text-gray-900">
                 {data.issues.url.split("/")[4]}/{data.issues.url.split("/")[5]}
               </span>
             </div>
-            <div className="ml-auto px-4 text-orange-900 font-medium">
+            <div className="ml-auto px-4 text-gray-900 font-medium">
               <button
                 onClick={() => {
                   isLoading(true);
@@ -108,7 +108,7 @@ export default function New() {
                 {searchParams.get("page") || "1"}
               </span>
             </div>
-            <div className="border-l pl-4 text-orange-900 font-medium">
+            <div className="border-l pl-4 text-gray-900 font-medium">
               <button
                 onClick={() => {
                   isLoading(true);
@@ -125,7 +125,7 @@ export default function New() {
               </button>
             </div>
           </div>
-          <div className="bg-white rounded-md text-gray-900 text-sm shadow-sm py-1">
+          <div className="bg-gray-50 rounded-lg border text-gray-900 text-sm shadow-sm py-1">
             {loading && (
               <div className="w-full h-screen bg-white z-50 text-center pt-24">
                 <div role="status">
@@ -145,7 +145,7 @@ export default function New() {
                       fill="currentFill"
                     />
                   </svg>
-                  <span className="block mt-4 font-cal text-orange-900 text-2xl">Fetching issues</span>
+                  <span className="block mt-4 font-cal text-gray-900 text-2xl">Fetching issues</span>
                 </div>
               </div>
             )}
@@ -182,7 +182,7 @@ export default function New() {
               &nbsp;Reach out to support, or create the issue manually.
             </div>
           </div>
-          <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-8 mt-16">
+          <h2 className="text-3xl font-cal text-gray-900 sm:text-5xl mb-8 mt-16">
             Manually create a bounty or submission
           </h2>
           <Form method="post" className="space-y-4">
@@ -194,7 +194,7 @@ export default function New() {
                 type="text"
                 name="title"
                 placeholder="Add a short, concise title"
-                className="block w-full rounded-md border-0 px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
               />
             </div>
             <div className="flex flex-col">
@@ -204,7 +204,7 @@ export default function New() {
               <textarea
                 name="description"
                 placeholder="Add a detailed description"
-                className="block w-full rounded-md border-0 px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
               />
             </div>
             <div className="flex flex-col">
@@ -215,7 +215,7 @@ export default function New() {
                 type="text"
                 name="github"
                 placeholder="https://github.com/calcom/cal.com/pull/12374"
-                className="block w-full rounded-md border-0 px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
               />
             </div>
             <div className="flex flex-col">
@@ -224,10 +224,10 @@ export default function New() {
               </label>
               <select
                 name="type"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm outline-none sm:max-w-xs sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border py-1.5 text-gray-900 shadow-sm outline-none sm:max-w-xs sm:text-sm sm:leading-6"
               >
                 <option value="BOUNTY">Bounty (one person works on one task)</option>
-                <option value="CHALLENGE">Challenge (multiple people submit different attemps to one task)</option>
+                <option value="CHALLENGE">Challenge (multiple people submit different attempts to one task)</option>
               </select>
             </div>
             <div className="flex flex-col">
@@ -238,7 +238,7 @@ export default function New() {
                 type="number"
                 name="reward"
                 placeholder="$20"
-                className="block w-full rounded-md border-0 px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border px-4 py-1.5 outline-none text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
               />
             </div>
             <div>

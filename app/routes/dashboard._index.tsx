@@ -44,22 +44,22 @@ export default function Index() {
                     <Shell title="Dashboard">
                         <div className="py-16">
                             <div className="mb-8 text-center">
-                                <ClockIcon className="h-12 w-12 text-orange-900 mx-auto mb-4"/>
-                                <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-4">
+                                <ClockIcon className="h-12 w-12 text-gray-900 mx-auto mb-4"/>
+                                <h2 className="text-3xl font-cal text-gray-900 sm:text-5xl mb-4">
                                     OSShack starts in{" "}
                                     {dayjs("2023-12-01T12:00:00Z").fromNow(true)}
                                 </h2>
                             </div>
                             <div className="grid grid-cols-3 gap-4">
                                 <div
-                                    className="border border-dashed border-orange-900 rounded px-4 py-2 text-orange-900">
+                                    className="border border-dashed border-orange-900 rounded px-4 py-2 text-gray-900">
                                     Fill out your details on{" "}
                                     <Link to="/profile" className="font-semibold underline">
                                         the profile page
                                     </Link>
                                 </div>
                                 <div
-                                    className="border border-dashed border-orange-900 rounded px-4 py-2 text-orange-900">
+                                    className="border border-dashed border-orange-900 rounded px-4 py-2 text-gray-900">
                                     Share this on{" "}
                                     <a
                                         href="https://twitter.com/intent/tweet?text=I'm%20participating%20in%20OSShack%2C%20where%20you%20can%20earn%20prizes%20with%20bounties%20and%20challenges%20in%20open%20source%20projects.%20Join%20us%20on%20December%201-3%20remotely%20or%20in%20NYC!&url=https%3A%2F%2Fosshack.com"
@@ -69,7 +69,7 @@ export default function Index() {
                                     </a>
                                 </div>
                                 <div
-                                    className="border border-dashed border-orange-900 rounded px-4 py-2 text-orange-900">
+                                    className="border border-dashed border-orange-900 rounded px-4 py-2 text-gray-900">
                                     Need help?{" "}
                                     <a
                                         href="mailto:bailey@pumfleet.co.uk"
@@ -95,9 +95,9 @@ export default function Index() {
             <SignedIn>
                 <Shell title="Dashboard">
                     {data.projects.map((project) => (
-                        <div key={project.id} className="mb-16">
+                        <div key={project.id} className="mb-16 border rounded-lg bg-gray-50 px-10 py-8">
                             <div className="flex">
-                                <h2 className="text-3xl font-cal text-orange-900 sm:text-5xl mb-4">
+                                <h2 className="text-3xl font-cal text-gray-900 mb-4">
                                     {project.name}
                                 </h2>
                                 <div className="ml-auto space-x-4 mt-2">
@@ -106,7 +106,7 @@ export default function Index() {
                                             href={project.guide}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-orange-500 hover:text-orange-700 text-xl font-cal"
+                                            className="text-orange-500 hover:text-orange-700 text-lg font-medium tracking-tight"
                                         >
                                             <ArrowTopRightOnSquareIcon className="w-4 h-4 mb-0.5 inline-block"/>{" "}
                                             Read the guide
@@ -117,7 +117,7 @@ export default function Index() {
                                             href={project.support}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-orange-500 hover:text-orange-700 text-xl font-cal"
+                                            className="text-orange-500 hover:text-orange-700 text-lg font-medium tracking-tight"
                                         >
                                             <ChatBubbleOvalLeftEllipsisIcon
                                                 className="w-4 h-4 mb-0.5 inline-block"/>{" "}
@@ -130,21 +130,21 @@ export default function Index() {
                                 <div className="flex">
                                     <Link
                                         to="/dashboard/new"
-                                        className="text-orange-500 hover:text-orange-700 text-xl font-cal"
+                                        className="text-orange-500 hover:text-orange-700 text-lg font-medium tracking-tight"
                                     >
                                         <PencilSquareIcon className="w-4 h-4 mb-0.5 inline-block"/>{" "}
                                         Create a new bounty or challenge
                                     </Link>
                                     <Link
                                         to="/review"
-                                        className="text-orange-500 hover:text-orange-700 text-xl font-cal ml-4"
+                                        className="text-orange-500 hover:text-orange-700 text-lg font-medium tracking-tight ml-4"
                                     >
                                         <MagnifyingGlassIcon className="w-4 h-4 mb-0.5 inline-block"/>{" "}
                                         Review submissions
                                     </Link>
                                     <div className="ml-auto pt-0.5">
                                         {data.allocated && data.allocated > 0 && (
-                                            <span className="text-orange-900 text-xl font-cal">
+                                            <span className="text-gray-900 text-md font-mono font-medium">
                         ${data.allocated} out of ${project.budget} allocated
                       </span>
                                         )}
@@ -153,7 +153,7 @@ export default function Index() {
                             )}
                             {project.bounties.filter((bounty) => bounty.type === "CHALLENGE")
                                 .length > 0 && (
-                                <h3 className="text-xl font-cal text-orange-900 sm:text-3xl my-4">
+                                <h3 className="text-xl font-medium text-gray-900 my-4">
                                     Challenges
                                 </h3>
                             )}
@@ -210,7 +210,7 @@ export default function Index() {
                                         </Link>
                                     ))}
                             </div>
-                            <h3 className="text-xl font-cal text-orange-900 sm:text-3xl my-4">
+                            <h3 className="text-xl font-medium text-gray-900 my-4">
                                 Bounties
                             </h3>
                             <div className="grid grid-cols-3 gap-4 mt-4">

@@ -114,20 +114,20 @@ export default function Review() {
                     <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                         {data.bounties.map((bounty) => (
                             <div key={bounty.id}>
-                                <h2 className="text-3xl font-cal text-orange-900 mb-2">
+                                <h2 className="text-2xl font-medium text-gray-900 tracking-tight mb-2">
                                     {bounty.title}
                                 </h2>
                                 {!bounty.submissions.length && (
-                                    <div className="text-gray-700">No submissions yet.</div>
+                                    <div className="text-gray-500">No submissions yet.</div>
                                 )}
                                 {bounty.submissions.filter((submission) => submission.status === "APPROVED").length > 0 && (
-                                    <div className="text-gray-700">This bounty is now closed.</div>
+                                    <div className="text-gray-500">This bounty is now closed.</div>
                                 )}
                                 <div className="bg-white rounded-md text-gray-900 text-sm shadow-sm">
                                     {bounty.submissions.filter((submission) => submission.status === "SUBMITTED").map((submission) => (
                                         <div
                                             key={submission.id}
-                                            className="px-4 py-2 border-b flex"
+                                            className="px-4 py-2 bg-gray-50 border rounded-lg flex"
                                         >
                                             <a
                                                 href={submission.url}

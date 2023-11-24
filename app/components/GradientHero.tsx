@@ -17,9 +17,9 @@ export default function GradientHero() {
             #gradient-canvas {
             width:100%;
             height:100%;
-            --gradient-color-1: #D9622B; 
+            --gradient-color-1: #FF4D3C; 
             --gradient-color-2: #ff6500; 
-            --gradient-color-3: #d26c2b;  
+            --gradient-color-3: #CB1200;  
             --gradient-color-4: #EE793C;
             }
          `}

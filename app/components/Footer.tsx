@@ -64,7 +64,7 @@ const navigation = [
 
 export default function Footer({padding = false}) {
   return (
-    <footer className="bg-orange-50">
+    <footer className="bg-white">
       <div className={`mx-auto max-w-7xl ${padding ? 'px-6 lg:px-8' : ''} py-12 md:flex md:items-center md:justify-between`}>
         {/* <div className="flex justify-center space-x-6 md:order-2">
           {navigation.map((item) => (
