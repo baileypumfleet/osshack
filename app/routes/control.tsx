@@ -33,43 +33,43 @@ export default function Index() {
     <div>
       <SignedIn>
         <Shell title="Mission Control">
-          <div className="grid grid-cols-4 gap-8">
-            <div className="bg-white rounded-md p-5 col-span-2">
+          <div className="grid grid-cols-4 gap-8 mx-8">
+            <div className="bg-gray-50 rounded-lg border p-5 col-span-2">
               <p className="text-3xl font-cal text-orange-900 sm:text-5xl mb-2">
                 {dayjs("2023-12-04T21:00:00Z").fromNow(true)}
               </p>
               <p className="text-gray-500">Time remaining</p>
             </div>
-            <div className="bg-white rounded-md p-5">
+            <div className="bg-gray-50 rounded-lg border p-5">
               <p className="text-3xl font-cal text-orange-900 sm:text-5xl mb-2">
                 {data?.totalBounties}
               </p>
               <p className="text-gray-500">Open bounties remaining</p>
             </div>
-            <div className="bg-white rounded-md p-5">
+            <div className="bg-gray-50 rounded-lg border p-5">
               <p className="text-3xl font-cal text-orange-900 sm:text-5xl mb-2 tracking-wide">
                 {formatter.format(data?.totalValue._sum.value || 0)}
               </p>
               <p className="text-gray-500">Still up for grabs</p>
             </div>
-            <div className="bg-white rounded-md p-5">
+            <div className="bg-gray-50 rounded-lg border p-5">
               <p className="text-3xl font-cal text-orange-900 sm:text-5xl mb-2">
                 {data?.totalUsers}
               </p>
               <p className="text-gray-500">Participants competing</p>
             </div>
-            <div className="bg-white rounded-md p-5">
+            <div className="bg-gray-50 rounded-lg border p-5">
               <p className="text-3xl font-cal text-orange-900 sm:text-5xl mb-2">
                 {data?.totalSubmissions}
               </p>
               <p className="text-gray-500">Submissions</p>
             </div>
-            <div className="bg-white rounded-md p-5 col-span-2 row-span-4">
+            <div className="bg-gray-50 rounded-lg border p-5 col-span-2 row-span-4">
               <h3 className="text-xl font-cal text-orange-900 sm:text-3xl mb-4">
                 Top open bounties
               </h3>
               <div className="grid grid-cols-1 gap-y-4">
-                {data?.bounties.map((bounty) => (
+                {data?.bounties.slice(0, 5).map((bounty) => (
                   <div
                     key={bounty.id}
                     className="flex justify-between items-center"
@@ -94,19 +94,19 @@ export default function Index() {
                 ))}
               </div>
             </div>
-            <div className="bg-white rounded-md p-5">
+            <div className="bg-gray-50 rounded-lg border p-5">
               <p className="text-3xl font-cal text-orange-900 sm:text-5xl mb-2">
                 {data?.totalProjects}
               </p>
               <p className="text-gray-500">Total projects</p>
             </div>
-            <div className="bg-white rounded-md p-5">
+            <div className="bg-gray-50 rounded-lg border p-5">
               <p className="text-3xl font-cal text-orange-900 sm:text-5xl mb-2">
                 {data?.totalChallenges}
               </p>
               <p className="text-gray-500">Open challenges remaining</p>
             </div>
-            {/* <div className="bg-white rounded-md p-5 col-span-2 row-span-2">
+            {/* <div className="bg-gray-50 rounded-lg border p-5 col-span-2 row-span-2">
               <h3 className="text-xl font-cal text-orange-900 sm:text-3xl mb-4">
                 Leaderboard
               </h3>
