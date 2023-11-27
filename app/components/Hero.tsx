@@ -152,10 +152,9 @@ export default function Hero() {
                     OSShack: NYC
                   </h1>
                   <p className="relative mt-6 text-lg leading-8 text-orange-200 sm:max-w-md lg:max-w-none">
-                    Join hundreds of the brightest students, hackers and OSS
-                    contributors working together and competing in a 3-day long
-                    hackathon hosted in NYC and remotely with $100k in prizes at
-                    stake!
+                    Join us for the OSShack on December 2-3rd, in person at Cornell Tech or remotely, and be part of a thrilling OSS hackathon with $100k in prizes!
+                    <br /><br />
+                    OSShack is your opportunity to showcase your skills and delve deeper into the open-source community.  Get ready for an unforgettable experience where coding prowess meets big rewards!
                   </p>
                   <div className="mt-10 flex items-center gap-x-6">
                     <SignedIn>
