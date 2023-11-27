@@ -4,7 +4,7 @@ import { json, redirect } from "@remix-run/node";
 import Shell from "~/components/Shell";
 import prisma from "~/lib/prisma";
 import {
-  Form,
+  Form, Link,
   useActionData,
   useLoaderData,
   useSearchParams,
@@ -165,8 +165,8 @@ export default function New() {
               data.issues?.map((issue) => (
                 <div key={issue.id} className="px-4 py-2 border-b flex">
                   <div>
-                    <div className="font-medium pt-1.5 mb-1">{issue.title}</div>
-                    <div className="flex flex-wrap">
+                    <a className="font-medium hover:text-orange-700 pt-1.5" href={issue.html_url} target="_blank" rel="noreferrer noopener">{issue.title}</a>
+                    <div className="flex flex-wrap mt-1">
                       {issue.labels.map((label) => (
                         <span
                           key={label.id}
