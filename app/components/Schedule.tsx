@@ -6,19 +6,9 @@ const schedule = [
     title: "Friday - December 1",
     content: (
       <>
-        <small className="font-bold uppercase text-orange-700">Kickoff</small>
+        <small className="font-bold uppercase text-orange-700">Kickoff Party</small>
         <br />
-        Networking & Teaming
-        <br />
-        <br />
-        <small className="font-bold uppercase text-orange-700">Morning</small>
-        <br />
-        Tech Panels &amp; Career Fair
-        <br />
-        <br />
-        <small className="font-bold uppercase text-orange-700">Afternoon</small>
-        <br />
-        Hacking begins!
+        Partying, Networking & Teaming
       </>
     ),
   },
@@ -26,6 +16,11 @@ const schedule = [
     title: "Saturday - December 2",
     content: (
       <>
+        <small className="font-bold uppercase text-orange-700">Morning</small>
+        <br />
+        Tech Panels &amp; Career Fair
+        <br />
+        <br />
         <small className="font-bold uppercase text-orange-700">All day</small>
         <br />
         Hacking solo or in teams, supported by mentors
