@@ -96,6 +96,11 @@ export default function New() {
                 </span>
               )}
             </div>
+            <div>
+              <p className="text-gray-500 ml-4">
+                {searchParams.get("label") ? "Filtering by label " + searchParams.get("label") : "Click a label to filter issues"}
+              </p>
+            </div>
             <div className="ml-auto px-4 text-gray-900 font-medium">
               <button
                 onClick={() => {
@@ -168,7 +173,8 @@ export default function New() {
                     <a className="font-medium hover:text-orange-700 pt-1.5" href={issue.html_url} target="_blank" rel="noreferrer noopener">{issue.title}</a>
                     <div className="flex flex-wrap mt-1">
                       {issue.labels.map((label) => (
-                        <span
+                        <Link
+                          to={`/dashboard/new?label=${label.name}`}
                           key={label.id}
                           style={{
                             backgroundColor:
@@ -181,7 +187,7 @@ export default function New() {
                           className="mr-2 mb-2 text-xs font-semibold px-2.5 py-0.5 rounded"
                         >
                           {label.name}
-                        </span>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -349,6 +355,7 @@ export const loader = async (args) => {
 
   const url = new URL(args.request.url);
   const page = url.searchParams.get("page");
+  const label = url.searchParams.get("label");
 
   const unfilteredIssues = await octokit.request(
     "GET /repos/{owner}/{repo}/issues",
@@ -356,6 +363,7 @@ export const loader = async (args) => {
       owner: user?.project?.repo?.split("/")[0] || "calcom",
       repo: user?.project?.repo?.split("/")[1] || "cal.com",
       page: parseInt(page || "1"),
+      labels: label || "",
     }
   );
 
