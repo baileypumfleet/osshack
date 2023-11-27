@@ -79,6 +79,31 @@ export default function New() {
         }
     }, [data.issues, actionData]);
 
+    function invertColor(hex) {
+        if (hex.indexOf('#') === 0) {
+            hex = hex.slice(1);
+        }
+        // convert 3-digit hex to 6-digits.
+        if (hex.length === 3) {
+            hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+        }
+        if (hex.length !== 6) {
+            throw new Error('Invalid HEX color.');
+        }
+        // invert color components
+        var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
+            g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
+            b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
+        // pad each with zeros and return
+        return '#' + padZero(r) + padZero(g) + padZero(b);
+    }
+
+    function padZero(str, len) {
+        len = len || 2;
+        var zeros = new Array(len).join('0');
+        return (zeros + str).slice(-len);
+    }
+
     return (
         <div>
             <SignedIn>
@@ -161,7 +186,16 @@ export default function New() {
                         )}
                         {data.issues.length > 0 ? (data.issues?.map((issue) => (
                             <div key={issue.id} className="px-4 py-2 border-b flex">
-                                <div className="font-medium pt-1.5">{issue.title}</div>
+                                <div>
+                                    <div className="font-medium pt-1.5 mb-1">{issue.title}</div>
+                                    <div className="flex flex-wrap">
+                                        {issue.labels.map((label) => (
+                                            <span key={label.id} style={{backgroundColor: "#" + label.color, color: invertColor("#" + label.color)}} className="mr-2 mb-2 text-xs font-semibold px-2.5 py-0.5 rounded">
+                                            {label.name}
+                                        </span>
+                                        ))}
+                                    </div>
+                                </div>
                                 <div className="ml-auto">
                                     <Form method="post">
                                         <input type="hidden" name="title" value={issue.title}/>
