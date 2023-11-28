@@ -42,11 +42,7 @@ export const action = async (args) => {
     let bounty;
 
     if (args.request.method === "DELETE") {
-        await prisma.bounty.delete({
-            where: {id: parseInt(id)},
-        });
-
-        return redirect("/dashboard");
+        return alert("You are not allowed to delete bounties.");
     } else if (args.request.method === "PATCH") {
         octokit = new Octokit({
             auth: process.env.GITHUB_TOKEN,
