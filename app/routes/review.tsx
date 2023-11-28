@@ -48,28 +48,30 @@ export const action = async (args) => {
             },
         });
 
-        // Send the reward
-        const options = {
-            method: "POST",
-            headers: {
-                accept: "application/json",
-                "content-type": "application/json",
-                authorization: "Bearer " + process.env.TREMENDOUS_TOKEN,
-            },
-            body: JSON.stringify({
-                external_id: newSubmission?.id.toString(),
-                payment: {funding_source_id: process.env.TREMENDOUS_FUNDING_SOURCE, channel: "API"},
-                reward: {
-                    campaign_id: process.env.TREMENDOUS_CAMPAIGN_ID,
-                    value: {denomination: newSubmission?.bounty.value, currency_code: "USD"},
-                    recipient: {name: newSubmission?.user.name, email: newSubmission?.user.email},
-                    delivery: {method: "EMAIL"}
-                }
-            })
-        };
+        if (newSubmission?.bounty.type === "BOUNTY" && newSubmission?.bounty.value < 1000) {
+            // Send the reward
+            const options = {
+                method: "POST",
+                headers: {
+                    accept: "application/json",
+                    "content-type": "application/json",
+                    authorization: "Bearer " + process.env.TREMENDOUS_TOKEN,
+                },
+                body: JSON.stringify({
+                    external_id: newSubmission?.id.toString(),
+                    payment: {funding_source_id: process.env.TREMENDOUS_FUNDING_SOURCE, channel: "API"},
+                    reward: {
+                        campaign_id: process.env.TREMENDOUS_CAMPAIGN_ID,
+                        value: {denomination: newSubmission?.bounty.value, currency_code: "USD"},
+                        recipient: {name: newSubmission?.user.name, email: newSubmission?.user.email},
+                        delivery: {method: "EMAIL"}
+                    }
+                })
+            };
 
-        const res = await fetch(process.env.TREMENDOUS_PRODUCTION === "true" ? "https://www.tremendous.com/api/v2/orders" : "https://testflight.tremendous.com/api/v2/orders", options);
-        return await res.json();
+            const res = await fetch(process.env.TREMENDOUS_PRODUCTION === "true" ? "https://www.tremendous.com/api/v2/orders" : "https://testflight.tremendous.com/api/v2/orders", options);
+            return await res.json();
+        }
     } else if (action === "REJECTED") {
         // Delete the submission
         await prisma.submission.delete({
