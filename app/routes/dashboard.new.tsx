@@ -79,6 +79,10 @@ export default function New() {
     }
   }, [data.issues, actionData]);
 
+  if (data.user?.projectId === null) {
+    return <div>Not allowed</div>;
+  }
+
   return (
     <div>
       <SignedIn>
