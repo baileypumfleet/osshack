@@ -160,7 +160,7 @@ export default function Hero() {
                     <SignedIn>
                       <Link
                         to="/dashboard"
-                        className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+                        className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600 z-30"
                       >
                         Go to your dashboard
                       </Link>
@@ -168,13 +168,13 @@ export default function Hero() {
                     <SignedOut>
                       <Link
                         to="/signup"
-                        className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+                        className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600 z-30"
                       >
                         Sign up to participate
                       </Link>
                       <Link
                         to="mailto:bailey@cal.com"
-                        className="text-sm font-semibold leading-6 text-orange-100 hover:text-white"
+                        className="text-sm font-semibold leading-6 text-orange-100 hover:text-white z-30"
                       >
                         Sponsor OSShack
                       </Link>
