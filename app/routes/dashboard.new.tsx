@@ -343,6 +343,8 @@ export const loader = async (args) => {
     },
   });
 
+  if (!user?.projectId) throw redirect("/dashboard");
+
   const bounties = await prisma.bounty.findMany({
     where: { projectId: user?.projectId || 0 },
     select: { github: true },
