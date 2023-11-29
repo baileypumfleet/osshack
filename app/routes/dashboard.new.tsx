@@ -4,7 +4,8 @@ import { json, redirect } from "@remix-run/node";
 import Shell from "~/components/Shell";
 import prisma from "~/lib/prisma";
 import {
-  Form, Link,
+  Form,
+  Link,
   useActionData,
   useLoaderData,
   useSearchParams,
@@ -102,7 +103,9 @@ export default function New() {
             </div>
             <div>
               <p className="text-gray-500 ml-4">
-                {searchParams.get("label") ? "Filtering by label " + searchParams.get("label") : "Click a label to filter issues"}
+                {searchParams.get("label")
+                  ? "Filtering by label " + searchParams.get("label")
+                  : "Click a label to filter issues"}
               </p>
             </div>
             <div className="ml-auto px-4 text-gray-900 font-medium">
@@ -174,7 +177,14 @@ export default function New() {
               data.issues?.map((issue) => (
                 <div key={issue.id} className="px-4 py-2 border-b flex">
                   <div>
-                    <a className="font-medium hover:text-orange-700 pt-1.5" href={issue.html_url} target="_blank" rel="noreferrer noopener">{issue.title}</a>
+                    <a
+                      className="font-medium hover:text-orange-700 pt-1.5"
+                      href={issue.html_url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      {issue.title}
+                    </a>
                     <div className="flex flex-wrap mt-1">
                       {issue.labels.map((label) => (
                         <Link
@@ -185,7 +195,8 @@ export default function New() {
                               "color-mix(in srgb, #" +
                               label.color +
                               ", transparent 50%)",
-                            color: "#" + label.color,
+                            color:
+                              "color-mix(in srgb, #" + label.color + ", #000)",
                             border: "1px solid" + label.color,
                           }}
                           className="mr-2 mb-2 text-xs font-semibold px-2.5 py-0.5 rounded"
