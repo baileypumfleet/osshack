@@ -5,4 +5,8 @@ export default {
   // assetsBuildDirectory: "public/build",
   // publicPath: "/build/",
   // serverBuildPath: "build/index.js",
+  serverDependenciesToBundle: [
+    "remix-i18next",
+    "react-i18next"
+  ],
 };
