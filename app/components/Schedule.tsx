@@ -1,87 +1,86 @@
 import { Disclosure } from "@headlessui/react";
 import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 
-const schedule = [
-  {
-    title: "Friday - December 1",
-    content: (
-      <>
-        <small className="font-bold uppercase text-orange-700">Kickoff Party</small>
-        <br />
-        7:00pm | Partying, Networking & Teaming w/ Redbull and DJ Solo Lechuga
-        <br />
-        <a href="https://lu.ma/8ns1rzxo" className="text-blue-600 hover:text-blue-800 visited:text-purple-600">
-          Launch party registration
-        </a>
-      </>
-    ),
-  },
-  {
-    title: "Saturday - December 2",
-    content: (
-      <>
-        <small className="font-bold uppercase text-orange-700">Morning</small>
-        <br />
-        <time className="block font-medium text-gray-500">8:00 AM | Breakfast</time>
-        <time className="block font-medium text-gray-500">9:00 AM | Opening Speeches</time>
-        <time className="block font-medium text-gray-500">9:45 AM | Hacking solo or in teams, supported by mentors</time>
-        <br />
-        <br />
-        <small className="font-bold uppercase text-orange-700">Hack Time</small>
-        <br />
-        <time className="block font-medium text-gray-500">12:00 PM | Lunch</time>
-        <time className="block font-medium text-gray-500">01:00 PM | More hacking</time>
-        <time className="block font-medium text-gray-500">06:00 PM | Dinner</time>
-        <time className="block font-medium text-gray-500">07:00 PM | Even more hacking</time>
-        <br />
-        <br />
-        <small className="font-bold uppercase text-orange-700">
-          Periodically
-        </small>
-        <br />
-        Guest lectures by mentors and sponsors
-        <br />
-        Snacks and surprises
-      </>
-    ),
-  },
-  {
-    title: "Sunday - December 3",
-    content: (
-      <>
-        <small className="font-bold uppercase text-orange-700">Morning</small>
-        <br />
-        <time className="block font-medium text-gray-500">09:00 AM | Breakfast</time>
-        <time className="block font-medium text-gray-500">10:00 AM | Keep pushing</time>
-        <br />
-        <br />
-        <small className="font-bold uppercase text-orange-700">Midday</small>
-        <br />
-        <time className="block font-medium text-gray-500">12:00 PM | Lunch</time>
-        <time className="block font-medium text-gray-500">03:14 PM | Submit repos and prepare for final presentations</time>
-        <br />
-        <br />
-        <small className="font-bold uppercase text-orange-700">Afternoon</small>
-        <br />
-        <time className="block font-medium text-gray-500">04:00 PM | Hackfair - Teams do their final pitches</time>
-        <time className="block font-medium text-gray-500">05:30 PM | Final Demos</time>
-        <br />
-        <br />
-        <small className="font-bold uppercase text-orange-700">Wrap-up</small>
-        <br />
-        <time className="block font-medium text-gray-500">06:30 PM | Deliberation &amp; Awards</time>
-      </>
-    ),
-  },
-];
-
-export default function Schedule() {
+export default function Schedule({resource}) {
+  const schedule = [
+    {
+      title: resource["ScheduleTitle1"],
+      content: (
+        <>
+          <small className="font-bold uppercase text-orange-700">{resource["KickOffParty"]}</small>
+          <br />
+            {resource["KickOffPartyDesc"]}
+          <br />
+          <a href="https://lu.ma/8ns1rzxo" className="text-blue-600 hover:text-blue-800 visited:text-purple-600">
+            {resource["LaunchPartyReg"]}
+          </a>
+        </>
+      ),
+    },
+    {
+      title: resource["ScheduleTitle2"],
+      content: (
+        <>
+          <small className="font-bold uppercase text-orange-700">{resource["Morning"]}</small>
+          <br />
+          <time className="block font-medium text-gray-500">{resource["MorningBreakfast"]}</time>
+          <time className="block font-medium text-gray-500">{resource["MorningOpeningSpeech"]}</time>
+          <time className="block font-medium text-gray-500">{resource["MorningHacking"]}</time>
+          <br />
+          <br />
+          <small className="font-bold uppercase text-orange-700">{resource["HackTime"]}</small>
+          <br />
+          <time className="block font-medium text-gray-500">{resource["HackLunch"]}</time>
+          <time className="block font-medium text-gray-500">{resource["HackMoreHack"]}</time>
+          <time className="block font-medium text-gray-500">{resource["HackDinner"]}</time>
+          <time className="block font-medium text-gray-500">{resource["HackEvenMore"]}</time>
+          <br />
+          <br />
+          <small className="font-bold uppercase text-orange-700">
+            {resource["Periodically"]}
+          </small>
+          <br />
+          {resource["PeriodicallyLectures"]}
+          <br />
+          {resource["PeriodicallySurprises"]}
+        </>
+      ),
+    },
+    {
+      title: resource["ScheduleTitle3"],
+      content: (
+        <>
+          <small className="font-bold uppercase text-orange-700">{resource["Morning2"]}</small>
+          <br />
+          <time className="block font-medium text-gray-500">{resource["Morning2BreakFast"]}</time>
+          <time className="block font-medium text-gray-500">{resource["Morning2Push"]}</time>
+          <br />
+          <br />
+          <small className="font-bold uppercase text-orange-700">{resource["Midday"]}</small>
+          <br />
+          <time className="block font-medium text-gray-500">{resource["MiddayLunch"]}</time>
+          <time className="block font-medium text-gray-500">{resource["MiddaySubmit"]}</time>
+          <br />
+          <br />
+          <small className="font-bold uppercase text-orange-700">{resource["Afternoon"]}</small>
+          <br />
+          <time className="block font-medium text-gray-500">{resource["AfternoonHackFair"]}</time>
+          <time className="block font-medium text-gray-500">{resource["AfternoonFinalDemo"]}</time>
+          <br />
+          <br />
+          <small className="font-bold uppercase text-orange-700">{resource["Wrap"]}</small>
+          <br />
+          <time className="block font-medium text-gray-500">{resource["Deliberation"]} &amp; {resource["Awards"]}</time>
+        </>
+      ),
+    },
+  ];
   return (
     <div id="schedule" className="bg-orange-50">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-7xl divide-y divide-orange-900/10">
           <h2 className="mt-2 text-3xl font-cal text-orange-900 sm:text-5xl">
-            Schedule
+            {resource["Schedule"]}
           </h2>
           <dl className="mt-10 space-y-6 divide-y divide-orange-900/10">
             {schedule.map((day, dayId) => (
