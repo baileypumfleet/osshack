@@ -4,17 +4,22 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import GradientHero from "./GradientHero";
 import { Link } from "@remix-run/react";
+import { useTranslation } from "react-i18next";
 
-const navigation = [
-  { name: "Sponsors", href: "#sponsors" },
-  { name: "Why Join?", href: "#why" },
-  { name: "Schedule", href: "#schedule" },
-  { name: "About", href: "#about" },
-];
+export let handle = {
+  i18n: "common",
+};
 
-export default function Hero() {
+export default function Hero({resource}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  let { t } = useTranslation();
+  const navigation = [
+    { name: resource["Sponsors"], href: "#sponsors" },
+    { name: resource["WhyJoin"], href: "#why" },
+    { name: resource["Schedule"], href: "#schedule" },
+    { name: resource["About"], href: "#about" },
+  ];
+  console.log(navigation)
   return (
     <div>
       <header className="absolute inset-x-0 top-0 z-50">
@@ -40,9 +45,9 @@ export default function Hero() {
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
-            {navigation.map((item) => (
+            {navigation.map((item, idx) => (
               <Link
-                key={item.name}
+                key={idx}
                 to={item.href}
                 className="text-sm font-semibold leading-6 text-orange-100"
               >
@@ -56,7 +61,7 @@ export default function Hero() {
                 to="/dashboard"
                 className="text-sm font-semibold leading-6 text-orange-200"
               >
-                Dashboard <span aria-hidden="true">&rarr;</span>
+                {resource["Dashboard"]} <span aria-hidden="true">&rarr;</span>
               </Link>
             </SignedIn>
             <SignedOut>
@@ -64,7 +69,7 @@ export default function Hero() {
                 to="/login"
                 className="text-sm font-semibold leading-6 text-orange-200"
               >
-                Log in <span aria-hidden="true">&rarr;</span>
+                {resource["LogIn"]} <span aria-hidden="true">&rarr;</span>
               </Link>
             </SignedOut>
           </div>
@@ -95,9 +100,9 @@ export default function Hero() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
-                  {navigation.map((item) => (
+                  {navigation.map((item, idx) => (
                     <Link
-                      key={item.name}
+                      key={idx}
                       to={item.href}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
@@ -111,7 +116,7 @@ export default function Hero() {
                       to="/dashboard"
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
-                      Dashboard <span aria-hidden="true">&rarr;</span>
+                      {resource["Dashboard"]} <span aria-hidden="true">&rarr;</span>
                     </Link>
                   </SignedIn>
                   <SignedOut>
@@ -119,7 +124,7 @@ export default function Hero() {
                       to="/login"
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
-                      Log in <span aria-hidden="true">&rarr;</span>
+                      {resource["LogIn"]} <span aria-hidden="true">&rarr;</span>
                     </Link>
                   </SignedOut>
                 </div>
@@ -152,9 +157,9 @@ export default function Hero() {
                     OSShack: NYC
                   </h1>
                   <p className="relative mt-6 text-lg leading-8 text-orange-200 sm:max-w-md lg:max-w-none">
-                    Join us for the OSShack on December 2-3rd, in person at Cornell Tech or remotely, and be part of a thrilling OSS hackathon with $100k in prizes!
+                    {resource["HeroTextMain"]}
                     <br /><br />
-                    OSShack is your opportunity to showcase your skills and delve deeper into the open-source community.  Get ready for an unforgettable experience where coding prowess meets big rewards!
+                    {resource["HeroTextMain2"]}
                   </p>
                   <div className="mt-10 flex items-center gap-x-6">
                     <SignedIn>
@@ -162,7 +167,7 @@ export default function Hero() {
                         to="/dashboard"
                         className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600 z-30"
                       >
-                        Go to your dashboard
+                        {resource["GoToDashboard"]}
                       </Link>
                     </SignedIn>
                     <SignedOut>
@@ -170,13 +175,13 @@ export default function Hero() {
                         to="/signup"
                         className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600 z-30"
                       >
-                        Sign up to participate
+                        {resource["SignUpToParticipate"]}
                       </Link>
                       <Link
                         to="mailto:bailey@cal.com"
                         className="text-sm font-semibold leading-6 text-orange-100 hover:text-white z-30"
                       >
-                        Sponsor OSShack
+                        {resource["SponsorOSSHack"]}
                       </Link>
                     </SignedOut>
                   </div>

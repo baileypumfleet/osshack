@@ -20,15 +20,21 @@
     "@remix-run/react": "^2.2.0",
     "@remix-run/serve": "^2.2.0",
     "dayjs": "^1.11.10",
+    "i18next": "^23.7.7",
+    "i18next-browser-languagedetector": "^7.2.0",
+    "i18next-fs-backend": "^2.3.0",
+    "i18next-http-backend": "^2.4.2",
     "isbot": "^3.6.8",
     "octokit": "^3.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-i18next": "^13.5.0",
     "react-markdown": "^9.0.1",
     "remark-gfm": "^4.0.0",
     "remark-github": "^12.0.0",
-    "remark-remove-comments": "^1.0.1"
+    "remark-remove-comments": "^1.0.1",
+    "remix-i18next": "^5.4.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.2.0",
