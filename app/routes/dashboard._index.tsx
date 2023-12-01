@@ -47,7 +47,7 @@ export default function Index() {
                                 <ClockIcon className="h-12 w-12 text-gray-900 mx-auto mb-4"/>
                                 <h2 className="text-3xl font-cal text-gray-900 sm:text-5xl mb-4">
                                     OSShack starts in{" "}
-                                    {dayjs("2023-12-01T12:00:00Z").fromNow(true)}
+                                    {dayjs("2023-12-02T15:00:00Z").fromNow(true)}
                                 </h2>
                             </div>
                             <div className="grid grid-cols-3 gap-4">
