@@ -22,8 +22,8 @@ const schedule = [
       <>
         <small className="font-bold uppercase text-orange-700">Morning</small>
         <br />
-        <time className="block font-medium text-gray-500">8:00 AM | Breakfast</time>
-        <time className="block font-medium text-gray-500">9:00 AM | Opening Speeches</time>
+        <time className="block font-medium text-gray-500">8:00 AM | Networking + Breakfast</time>
+        <time className="block font-medium text-gray-500">10:00 AM | Opening Speeches</time>
         <time className="block font-medium text-gray-500">9:45 AM | Hacking solo or in teams, supported by mentors</time>
         <br />
         <br />
