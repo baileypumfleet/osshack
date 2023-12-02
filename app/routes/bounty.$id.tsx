@@ -127,7 +127,7 @@ export default function Bounty() {
                                 Description
                             </h2>
                             <div
-                                className="prose prose-headings:font-cal prose-headings:text-orange-900 prose-headings:mb-2 prose-headings:font-normal">
+                                className="prose prose-headings:font-cal prose-headings:text-orange-900 prose-headings:mb-2 prose-headings:font-normal overflow-x-hidden">
                                 <Markdown
                                     remarkPlugins={[remarkGfm, removeComments, [remarkGithub, {repository: data.bounty?.project.repo}]]}>{data.bounty?.description}</Markdown>
                             </div>
