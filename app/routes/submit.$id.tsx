@@ -64,7 +64,7 @@ export default function Bounty() {
     <>
       <SignedIn>
         <Shell title="Submit a solution">
-          <div className="grid grid-cols-3 gap-x-8">
+          <div className="grid grid-cols-3 gap-x-8 mx-10">
             <div className="col-span-2">
               <h2 className="text-3xl font-cal text-orange-900 mb-4">
                 Automatically link from GitHub

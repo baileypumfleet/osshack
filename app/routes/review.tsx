@@ -113,7 +113,7 @@ export default function Review() {
                             </div>
                         </div>
                     )}
-                    <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                    <div className="grid grid-cols-2 gap-y-4 gap-x-8 mx-10">
                         {data.bounties.map((bounty) => (
                             <div key={bounty.id}>
                                 <h2 className="text-2xl font-medium text-gray-900 tracking-tight mb-2">
