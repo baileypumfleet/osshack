@@ -159,56 +159,54 @@ export default function Index() {
                   </h3>
                 )}
               <div className="grid grid-cols-3 gap-4 mt-4">
-                {data.user?.type === "IN_PERSON" &&
-                  project.bounties
-                    .filter((bounty) => bounty.type === "CHALLENGE")
-                    .map((bounty) => (
-                      <Link
-                        to={`/bounty/${bounty.id}`}
-                        key={bounty.id}
-                        className="bg-white hover:bg-gray-50 border border-gray-300 border-b-4 border-b-gray-200 rounded-lg p-5 relative"
-                      >
-                        <div className="flex">
-                          <h3 className="text-lg font-medium text-gray-900">
-                            {bounty.title}
-                          </h3>
-                          {bounty.submissions.filter(
+                {project.bounties
+                  .filter((bounty) => bounty.type === "CHALLENGE")
+                  .map((bounty) => (
+                    <Link
+                      to={`/bounty/${bounty.id}`}
+                      key={bounty.id}
+                      className="bg-white hover:bg-gray-50 border border-gray-300 border-b-4 border-b-gray-200 rounded-lg p-5 relative"
+                    >
+                      <div className="flex">
+                        <h3 className="text-lg font-medium text-gray-900">
+                          {bounty.title}
+                        </h3>
+                        {bounty.submissions.filter(
+                          (submission) => submission.status === "APPROVED"
+                        ).length !== 0 && (
+                          <span className="text-md tracking-tight text-red-500 font-mono font-semibold ml-auto flex">
+                            <XCircleIcon className="w-5 h-5 mt-0.5 mr-1 inline-block" />
+                            Closed
+                          </span>
+                        )}
+                        {bounty.submissions.filter(
+                          (submission) => submission.status === "SUBMITTED"
+                        ).length !== 0 && (
+                          <span className="text-md tracking-tight text-yellow-500 font-mono font-semibold ml-auto flex">
+                            <ExclamationTriangleIcon className="w-5 h-5 mt-0.5 mr-1 inline-block" />
+                            Submitted
+                          </span>
+                        )}
+                        {bounty.submissions.filter(
+                          (submission) => submission.status === "SUBMITTED"
+                        ).length === 0 &&
+                          bounty.submissions.filter(
                             (submission) => submission.status === "APPROVED"
-                          ).length !== 0 && (
-                            <span className="text-md tracking-tight text-red-500 font-mono font-semibold ml-auto flex">
-                              <XCircleIcon className="w-5 h-5 mt-0.5 mr-1 inline-block" />
-                              Closed
+                          ).length === 0 && (
+                            <span className="text-md tracking-tight text-orange-500 font-mono font-semibold ml-auto">
+                              ${bounty.value}
                             </span>
                           )}
-                          {bounty.submissions.filter(
-                            (submission) => submission.status === "SUBMITTED"
-                          ).length !== 0 && (
-                            <span className="text-md tracking-tight text-yellow-500 font-mono font-semibold ml-auto flex">
-                              <ExclamationTriangleIcon className="w-5 h-5 mt-0.5 mr-1 inline-block" />
-                              Submitted
-                            </span>
-                          )}
-                          {bounty.submissions.filter(
-                            (submission) => submission.status === "SUBMITTED"
-                          ).length === 0 &&
-                            bounty.submissions.filter(
-                              (submission) => submission.status === "APPROVED"
-                            ).length === 0 && (
-                              <span className="text-md tracking-tight text-orange-500 font-mono font-semibold ml-auto">
-                                ${bounty.value}
-                              </span>
-                            )}
-                        </div>
-                        <p className="text-sm text-gray-600 overflow-x-hidden">
-                          <Markdown remarkPlugins={[remarkGfm, removeComments]}>
-                            {bounty.description &&
-                            bounty.description.length > 50
-                              ? bounty.description.substring(0, 50) + "..."
-                              : bounty.description}
-                          </Markdown>
-                        </p>
-                      </Link>
-                    ))}
+                      </div>
+                      <p className="text-sm text-gray-600 overflow-x-hidden">
+                        <Markdown remarkPlugins={[remarkGfm, removeComments]}>
+                          {bounty.description && bounty.description.length > 50
+                            ? bounty.description.substring(0, 50) + "..."
+                            : bounty.description}
+                        </Markdown>
+                      </p>
+                    </Link>
+                  ))}
               </div>
               <h3 className="text-xl font-medium text-gray-900 my-4">
                 Bounties
