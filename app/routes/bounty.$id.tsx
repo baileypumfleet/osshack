@@ -42,11 +42,18 @@ export const action = async (args) => {
     let bounty;
 
     if (args.request.method === "DELETE") {
+        const bountyToDelete = await prisma.bounty.findFirst({
+          where: {id:parseInt(id)},
+          include: {submissions:true},
+        })
+        if(bountyToDelete?.submissions.length==0){
         await prisma.bounty.delete({
             where: {id: parseInt(id)},
         });
-
         return redirect("/dashboard");
+        }else{
+          toast.error("Cannot delete bounty! Bounty has submissions");
+        }
     } else if (args.request.method === "PATCH") {
         octokit = new Octokit({
             auth: process.env.GITHUB_TOKEN,
