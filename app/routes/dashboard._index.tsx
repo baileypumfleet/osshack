@@ -93,33 +93,32 @@ export default function Index() {
       <SignedIn>
         <Shell title="Dashboard">
           <div className="mb-16 border rounded-lg bg-gray-50 px-10 py-8">
-            <h2 className="text-3xl font-cal text-gray-900 mb-4">🏆 Best Submission Prizes</h2>
+            <h2 className="text-3xl font-cal text-gray-900 mb-4">
+              🏆 Best Submission Prizes
+            </h2>
             <div className="grid grid-cols-3 gap-4 mt-4">
-              <div className="bg-white hover:bg-gray-50 border border-gray-300 border-b-4 border-b-gray-200 rounded-lg p-5">
-                <h3 className="text-lg font-medium text-gray-900">
-                  #1
-                </h3>
-                <p className="text-sm text-gray-600 overflow-x-hidden">
-                  Dinner and interview to be fast-tracked for a $150k investment
-                </p>
-              </div>
-              <div className="bg-white hover:bg-gray-50 border border-gray-300 border-b-4 border-b-gray-200 rounded-lg p-5">
-                <h3 className="text-lg font-medium text-gray-900">
-                  #2
-                </h3>
-                <p className="text-sm text-gray-600 overflow-x-hidden">
-                  Team interview for an internship or potentially a job Friday
-                  with Cal.com
-                </p>
-              </div>
-              <div className="bg-white hover:bg-gray-50 border border-gray-300 border-b-4 border-b-gray-200 rounded-lg p-5">
-                <h3 className="text-lg font-medium text-gray-900">
-                  #3
-                </h3>
-                <p className="text-sm text-gray-600 overflow-x-hidden">
-                  Dinner with CEO and Head of Engineering of Cal.com on Sunday
-                </p>
-              </div>
+              {data.projects[0].bounties
+                .filter((bounty) => bounty.type === "GLOBAL")
+                .map((bounty) => (
+                  <Link
+                    to={`/bounty/${bounty.id}`}
+                    key={bounty.id}
+                    className="bg-white hover:bg-gray-50 border border-gray-300 border-b-4 border-b-gray-200 rounded-lg p-5 relative"
+                  >
+                    <div className="flex">
+                      <h3 className="text-lg font-medium text-gray-900">
+                        {bounty.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm text-gray-600 overflow-x-hidden">
+                      <Markdown remarkPlugins={[remarkGfm, removeComments]}>
+                        {bounty.description && bounty.description.length > 50
+                          ? bounty.description.substring(0, 50) + "..."
+                          : bounty.description}
+                      </Markdown>
+                    </p>
+                  </Link>
+                ))}
             </div>
           </div>
           {data.projects.map((project) => (

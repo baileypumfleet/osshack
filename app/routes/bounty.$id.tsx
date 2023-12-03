@@ -202,14 +202,20 @@ export default function Bounty() {
               </div>
             </div>
             <div>
-              <h2 className="text-3xl font-cal text-orange-900 mb-2">Reward</h2>
-              <p className="text-gray-800 mb-8">
-                <span className="font-semibold text-gray-900">
-                  ${data.bounty?.value}
-                </span>{" "}
-                paid after approval of your submission, redeemable via
-                Tremendous.
-              </p>
+              {data.bounty?.value !== null && (
+                <>
+                  <h2 className="text-3xl font-cal text-orange-900 mb-2">
+                    Reward
+                  </h2>
+                  <p className="text-gray-800 mb-8">
+                    <span className="font-semibold text-gray-900">
+                      ${data.bounty?.value}
+                    </span>{" "}
+                    paid after approval of your submission, redeemable via
+                    Tremendous.
+                  </p>
+                </>
+              )}
 
               {data.bounty?.github && (
                 <>

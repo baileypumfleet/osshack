@@ -57,6 +57,7 @@ model Bounty {
 enum BountyType {
   BOUNTY
   CHALLENGE
+  GLOBAL
 }
 
 enum Status {
