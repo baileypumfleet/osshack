@@ -111,7 +111,7 @@ export default function Bounty() {
                 data.bounty?.submissions.filter(
                   (submission) => submission.status === "APPROVED"
                 ).length === 0 &&
-                data.bounty?.submissions.length > 0 && (
+                data.bounty?.submissions.length > 0 && data.bounty?.type === "BOUNTY" && (
                   <div className="mb-4 text-red-500 bg-red-100 px-4 py-2 rounded-md w-full">
                     <ExclamationTriangleIcon className="inline h-5 w-5 mr-2 pb-0.5" />
                     <h3 className="inline text-red-600 font-medium text-lg">
