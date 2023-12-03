@@ -276,9 +276,9 @@ export default function Index() {
                         {bounty.submissions.filter(
                           (submission) => submission.status === "APPROVED"
                         ).length !== 0 && (
-                          <span className="text-md tracking-tight text-red-500 font-mono font-semibold ml-auto flex">
-                            <XCircleIcon className="w-5 h-5 mt-0.5 mr-1 inline-block" />
-                            Closed
+                          <span className="text-md tracking-tight text-green-500 font-mono font-semibold ml-auto flex">
+                            <CheckCircleIcon className="w-5 h-5 mt-0.5 mr-1 inline-block" />
+                            Awarded
                           </span>
                         )}
                         {bounty.submissions.filter(
