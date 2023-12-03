@@ -36,7 +36,7 @@ export default function Index() {
           <div className="grid grid-cols-4 gap-8 mx-8">
             <div className="bg-gray-50 rounded-lg border p-5 col-span-2">
               <p className="text-3xl font-cal text-orange-900 sm:text-5xl mb-2">
-                {dayjs("2023-12-04T21:00:00Z").fromNow(true)}
+                {dayjs("2023-12-03T20:14:00Z").fromNow(true)}
               </p>
               <p className="text-gray-500">Time remaining</p>
             </div>
