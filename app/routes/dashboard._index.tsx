@@ -283,7 +283,9 @@ export default function Index() {
                         )}
                         {bounty.submissions.filter(
                           (submission) => submission.status === "SUBMITTED"
-                        ).length !== 0 && (
+                        ).length !== 0 && bounty.submissions.filter(
+                          (submission) => submission.status === "APPROVED"
+                        ).length === 0 && (
                           <span className="text-md tracking-tight text-yellow-500 font-mono font-semibold ml-auto flex">
                             <ExclamationTriangleIcon className="w-5 h-5 mt-0.5 mr-1 inline-block" />
                             Submitted
